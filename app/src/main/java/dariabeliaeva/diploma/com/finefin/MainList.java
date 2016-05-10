@@ -198,8 +198,7 @@ public class MainList extends Fragment {
     private void addSpenItem(String spenItemText, int spenSum) {
         if (spenItemText == null || spenItemText.length() == 0) {
 
-            Toast
-                    .makeText(getActivity(), "Could not be empty!", Toast.LENGTH_SHORT)
+            Toast.makeText(getActivity(), "Could not be empty!", Toast.LENGTH_SHORT)
                     .show();
             return;
 

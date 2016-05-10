@@ -8,32 +8,29 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Dari on 5/10/2016.
  */
 public class DataFiller {
 
-    public PieData generatePieData() {
+    public PieData generatePieData(Map<String, String> data) {
 
         int count = 4;
 
         ArrayList<Entry> entries1 = new ArrayList<Entry>();
-        ArrayList<String> xVals = new ArrayList<String>();
+        ArrayList<String> xVals = new ArrayList<>(data.keySet());
 
-        xVals.add("Quarter 1");
-        xVals.add("Quarter 2");
-        xVals.add("Quarter 3");
-        xVals.add("Quarter 4");
-
-        for(int i = 0; i < count; i++) {
-            xVals.add("entry" + (i+1));
-
-            entries1.add(new Entry((float) (Math.random() * 60) + 40, i));
+        for(int i = 0; i < xVals.size(); i++) {
+            if (Float.parseFloat(data.get(xVals.get(i))) > 0)
+            entries1.add(new Entry(Float.parseFloat(data.get(xVals.get(i))), i));
         }
 
-        PieDataSet ds1 = new PieDataSet(entries1, "Quarterly Revenues 2015");
-        ds1.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        PieDataSet ds1 = new PieDataSet(entries1, "Categories");
+        ds1.setColors(ColorTemplate.PASTEL_COLORS);
         ds1.setSliceSpace(2f);
         ds1.setValueTextColor(Color.WHITE);
         ds1.setValueTextSize(12f);

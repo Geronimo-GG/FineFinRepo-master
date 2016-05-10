@@ -19,13 +19,16 @@ public class SpendingsDAO {
 
     private Realm pRealm;
 
+    public SpendingsDAO(){
+        pRealm = Realm.getDefaultInstance();
+
+    }
 
     //pRealm = Realm.getInstance(this);
 
     public void addSpendings(String description, int price, Date date, String catName, Categories cat)
     {
         Spendings spen = new Spendings();
-        pRealm = Realm.getDefaultInstance();
         spen.setId(System.currentTimeMillis());
         spen.setName(description);
         spen.setPrice(price);

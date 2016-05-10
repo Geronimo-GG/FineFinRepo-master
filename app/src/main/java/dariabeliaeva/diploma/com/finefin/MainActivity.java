@@ -34,7 +34,6 @@ import dariabeliaeva.diploma.com.finefin.data_models.Spendings;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-//import co.moonmonkeylabs.realmrecyclerview.example.models.TodoItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -97,8 +96,7 @@ public class MainActivity extends AppCompatActivity {
         cat.addCategory("Lottery", "income");
         cat.addCategory("Gift", "income");
 
-        SpendingsDAO sp = new SpendingsDAO();
-        sp.sumByCat("Transport");
+
 
     }
 

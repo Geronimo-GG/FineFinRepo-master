@@ -49,65 +49,45 @@ public class Diagram extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_diagram, container, false);
-        setChartData();
         return rootView;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setChartData();
+
+    }
+
 
 
     public void setChartData() {
         CategoriesDAO cat = new CategoriesDAO();
-        Map data = new HashMap();
         SpendingsDAO spendingsDAO = new SpendingsDAO();
-        List<String> names = new ArrayList<>();
+        Map<String, String> data = new HashMap<>();
         DataFiller df = new DataFiller();
-        names = cat.getCatNamesOnly();
-        //data = cat.getSumByCategory();
 
-        /*ArrayList<Entry> cats = new ArrayList<>();
-        for (int i = 0; i < names.size(); i++) {
-            String name = names.get(i);
-            long sum = spendingsDAO.sumByCat(name);
-            cats.add(new Entry((float) sum, i));
+        ArrayList<String> categoriesNames = cat.getCatNamesOnly();
+        for(String categoryName : categoriesNames){
+            data.put(categoryName, spendingsDAO.sumByCat(categoryName) + "");
         }
 
 
-        PieDataSet pieDataSet = new PieDataSet(cats, "Zero");
-//        pieDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-//        PieDataSet pieData1 = new PieDataSet(cats1, "One");
-//        pieData1.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-        PieChart chart = (PieChart) rootView.findViewById(R.id.chart);
-        //chart.setData(pieData);
-        //ArrayList<IPieDataSet> dataSets = new ArrayList<IPieDataSet>();
-        //dataSets.add(pieDataSet);
-        //dataSets.add(pieData1);
-
-//        ArrayList<String> xVals = new ArrayList<>();
-
-
-        PieData values = new PieData(names, pieDataSet);
-        //data.setDataSet(); */
         PieChart mChart = (PieChart) rootView.findViewById(R.id.chart);
-        mChart.setDescription("");
+        mChart.setDescription("description");
 
-//        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
-
-//        mChart.setCenterTextTypeface(tf);
         mChart.setCenterText("Hello");
         mChart.setCenterTextSize(10f);
-//        mChart.setCenterTextTypeface(tf);
 
-        // radius of the center hole in percent of maximum radius
-        mChart.setHoleRadius(15f);
+        mChart.setHoleRadius(45);
         mChart.setTransparentCircleRadius(50f);
 
         Legend l = mChart.getLegend();
         l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
 
-        mChart.setData(df.generatePieData());
+        mChart.setData(df.generatePieData(data));
 
 
-        //chart.invalidate();
 
     }
 

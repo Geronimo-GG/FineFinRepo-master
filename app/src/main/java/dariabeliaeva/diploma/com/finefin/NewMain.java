@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import dariabeliaeva.diploma.com.finefin.dao.SpendingsDAO;
+
 public class NewMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,6 +41,8 @@ public class NewMain extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getFragmentManager().beginTransaction().add(R.id.content_main, new MainList()).commit();
+
+
     }
 
     @Override
