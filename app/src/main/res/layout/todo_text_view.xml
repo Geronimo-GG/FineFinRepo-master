@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/list_cell">
+
+    <TextView
+        android:id="@+id/todo_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="4dp"
+        android:text="Main Text"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        />
+
+    <TextView
+        android:id="@+id/date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="4dp"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/black"
+        android:layout_toRightOf="@+id/todo_text_view"
+        android:layout_alignBaseline="@+id/todo_text_view" />
+
+    <TextView
+        android:id="@+id/price_text_view"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="4dp"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:layout_alignEnd="@+id/todo_text_view"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/textView"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/todo_text_view"
+        android:layout_margin="8dp"/>
+</RelativeLayout>
