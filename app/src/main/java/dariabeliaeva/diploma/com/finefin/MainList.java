@@ -120,7 +120,7 @@ public class MainList extends Fragment {
                 .findAll();
         ArrayList<Spendings> spenItemsArrayList = new ArrayList<>();
         spenItemsArrayList.addAll(spenItems);
-        long rezult;
+        final long rezult;
 
         finListAdapter = new FinListAdapter();
         Collections.reverse(spenItemsArrayList);
@@ -129,7 +129,7 @@ public class MainList extends Fragment {
         realmRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         realmRecyclerView.setAdapter(finListAdapter);
         rezult = finListAdapter.UpdateBalance();
-        TextView txtBal = (TextView) rootView.findViewById(R.id.tvBalance);
+        final TextView txtBal = (TextView) rootView.findViewById(R.id.tvBalance);
         txtBal.setText("Balance: " + rezult);
 
 
@@ -145,7 +145,8 @@ public class MainList extends Fragment {
                 finListAdapter.getSpendings().get(viewHolder.getAdapterPosition()).removeFromRealm();
                 realm.commitTransaction();
                 finListAdapter.removeSpending(viewHolder.getAdapterPosition());
-
+                float balance = finListAdapter.UpdateBalance();
+                txtBal.setText("Balance: " + balance);
 
             }
         };

@@ -17,16 +17,18 @@ import java.util.Map;
  */
 public class DataFiller {
 
-    public PieData generatePieData(Map<String, String> data) {
-
-        int count = 4;
-
-        ArrayList<Entry> entries1 = new ArrayList<Entry>();
+    public PieData generatePieData(final Map<String, String> imuttData) {
+        Map<String, String> data = new HashMap();
+        for (String key : imuttData.keySet()){
+            if (Float.parseFloat(imuttData.get(key)) > 0){
+                data.put(key, imuttData.get(key));
+            }
+        }
+        ArrayList<Entry> entries1 = new ArrayList<>();
         ArrayList<String> xVals = new ArrayList<>(data.keySet());
 
         for(int i = 0; i < xVals.size(); i++) {
-            if (Float.parseFloat(data.get(xVals.get(i))) > 0)
-            entries1.add(new Entry(Float.parseFloat(data.get(xVals.get(i))), i));
+                entries1.add(new Entry(Float.parseFloat(data.get(xVals.get(i))), i));
         }
 
         PieDataSet ds1 = new PieDataSet(entries1, "Categories");

@@ -2,6 +2,7 @@ package dariabeliaeva.diploma.com.finefin;
 
 import android.app.DatePickerDialog;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -70,12 +71,15 @@ public class AddNoteActivity extends AppCompatActivity {
         }, mYear, mMonth, mDay
         );
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-
+                if (expText.getText().toString().length() == 0){
+                    Snackbar.make(fab, "Please fill price", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
                 spenSum = Integer.parseInt(expText.getText().toString());
                 spenDate = date;
                 spenDesc = descText.getText().toString();
