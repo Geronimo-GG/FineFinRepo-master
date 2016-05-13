@@ -46,8 +46,8 @@ public class DiagramContainer extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(fragmentIn, "Outcomes");
-        adapter.addFragment(fragmentOut, "Incomes");
+        adapter.addFragment(fragmentOut, "Outcomes");
+        adapter.addFragment(fragmentIn, "Incomes");
         viewPager.setAdapter(adapter);
     }
 

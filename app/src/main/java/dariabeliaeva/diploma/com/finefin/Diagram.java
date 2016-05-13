@@ -2,34 +2,24 @@ package dariabeliaeva.diploma.com.finefin;
 
 
 import android.app.Fragment;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.realm.implementation.RealmPieDataSet;
-import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import dariabeliaeva.diploma.com.finefin.adapter.CategoriesAdapter;
 import dariabeliaeva.diploma.com.finefin.charts.DataFiller;
 import dariabeliaeva.diploma.com.finefin.dao.CategoriesDAO;
 import dariabeliaeva.diploma.com.finefin.dao.SpendingsDAO;
-import dariabeliaeva.diploma.com.finefin.data_models.Categories;
-import dariabeliaeva.diploma.com.finefin.data_models.Spendings;
 
 
 /**
@@ -38,6 +28,8 @@ import dariabeliaeva.diploma.com.finefin.data_models.Spendings;
 public class Diagram extends Fragment {
 
     private boolean outcomes;
+    private RecyclerView categoriesList;
+    private float sum = 0;
 
     public Diagram() {
         // Required empty public constructor
@@ -50,19 +42,48 @@ public class Diagram extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_diagram, container, false);
+        categoriesList = (RecyclerView) rootView.findViewById(R.id.categories_list);
         return rootView;
+    }
+
+    private void initCategoriesList(Map<String, String> imuttData) {
+        Map<String, String> data = new HashMap<>();
+        if (outcomes) {
+            for (String key : imuttData.keySet()){
+                if (Float.parseFloat(imuttData.get(key)) < 0){
+                    data.put(key, imuttData.get(key));
+                }
+            }
+        }else{
+            for (String key : imuttData.keySet()){
+                if (Float.parseFloat(imuttData.get(key)) > 0){
+                    data.put(key, imuttData.get(key));
+                }
+            }
+        }
+
+        sum = sumData(data);
+
+        CategoriesAdapter categoriesAdapter = new CategoriesAdapter(getActivity());
+        categoriesAdapter.setCategories(data);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        categoriesList.setLayoutManager(linearLayoutManager);
+        categoriesList.setNestedScrollingEnabled(true);
+        categoriesList.setAdapter(categoriesAdapter);
+
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        setChartData();
+        initData();
 
     }
 
 
 
-    public void setChartData() {
+    public void initData() {
         CategoriesDAO cat = new CategoriesDAO();
         SpendingsDAO spendingsDAO = new SpendingsDAO();
         Map<String, String> data = new HashMap<>();
@@ -73,13 +94,20 @@ public class Diagram extends Fragment {
         for(String categoryName : categoriesNames){
             data.put(categoryName, spendingsDAO.sumByCat(categoryName) + "");
         }
+        initCategoriesList(data);
 
         if (outcomes) data = invertValues(data);
-
         PieChart mChart = (PieChart) rootView.findViewById(R.id.chart);
-        mChart.setDescription("description");
+        if (outcomes) {
+            mChart.setCenterText("Outcomes");
+            mChart.setDescription("You spent: " + sum);
+        }
+        else {
+            mChart.setCenterText("Incomes");
+            mChart.setDescription("You earned: " + sum);
 
-        mChart.setCenterText("Hello");
+        }
+
         mChart.setCenterTextSize(10f);
 
         mChart.setHoleRadius(45);
@@ -92,6 +120,14 @@ public class Diagram extends Fragment {
 
 
 
+    }
+
+    private float sumData(Map<String, String> data) {
+        float sum = 0;
+        for (String key : data.keySet()){
+            sum += Math.abs(Float.parseFloat(data.get(key)));
+        }
+        return sum;
     }
 
     private Map<String, String> invertValues(Map<String, String> data) {
