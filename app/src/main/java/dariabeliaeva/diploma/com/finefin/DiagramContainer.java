@@ -8,7 +8,15 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TabHost;
+
+import java.util.ArrayList;
+
+import dariabeliaeva.diploma.com.finefin.adapter.CustomSpinnerAdapter;
 
 
 /**
@@ -19,6 +27,7 @@ public class DiagramContainer extends Fragment {
     private View rootView;
     private ViewPager viewPager;
     private TabLayout tabHost;
+    private SpinnerAdapter spinnerAdapter;
 
     private Diagram fragmentIn, fragmentOut;
 
@@ -33,14 +42,30 @@ public class DiagramContainer extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_diagram_container, container, false);
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
         tabHost = ((NewMain) getActivity()).getTabHost();
-
+        initSpinner();
         fragmentIn = new Diagram();
         fragmentOut = new Diagram();
         fragmentOut.setOutcomes(true);
 
         setupViewPager(viewPager);
         tabHost.setupWithViewPager(viewPager);
+
         return rootView;
+    }
+
+    private void initSpinner() {
+        Spinner spinner = ((NewMain) getActivity()).getSpinner();
+
+
+        ArrayList<String> items = new ArrayList<>();
+        items.add("Day");
+        items.add("Week");
+        items.add("Month");
+        items.add("All time");
+
+        spinnerAdapter = new CustomSpinnerAdapter(getActivity(), items);
+        spinner.setAdapter(spinnerAdapter);
+
     }
 
 

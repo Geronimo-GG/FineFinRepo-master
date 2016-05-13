@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
 
 import dariabeliaeva.diploma.com.finefin.dao.SpendingsDAO;
 
@@ -24,16 +25,21 @@ public class NewMain extends AppCompatActivity
 
 
     TabLayout tabs;
+    Spinner spinner;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Spends history");
 
         tabs = (TabLayout) findViewById(R.id.tabs);
+        spinner = (Spinner) findViewById(R.id.spinner);
 
 
 
@@ -95,21 +101,27 @@ public class NewMain extends AppCompatActivity
 
         if (id != R.id.nav_stat){
             tabs.setVisibility(View.GONE);
+            spinner.setVisibility(View.GONE);
         }else{
             tabs.setVisibility(View.VISIBLE);
+            spinner.setVisibility(View.VISIBLE);
         }
 
         if (id == R.id.nav_home) {
+            toolbar.setTitle("Spends history");
             newFragment = new MainList();
             transaction.replace(R.id.content_main, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
         } else if (id == R.id.nav_new) {
+
             intent = new Intent(this, AddNoteActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             this.startActivity(intent);
 
         } else if (id == R.id.nav_stat) {
+            toolbar.setTitle("Statistic");
+
             //newFragment = ;
             DiagramContainer diagramContainer = new DiagramContainer();
             transaction.replace(R.id.content_main, diagramContainer);
@@ -129,5 +141,9 @@ public class NewMain extends AppCompatActivity
 
     public TabLayout getTabHost() {
         return tabs;
+    }
+
+    public Spinner getSpinner() {
+        return spinner;
     }
 }
