@@ -8,6 +8,7 @@
             android:title="Home" />
         <item
             android:id="@+id/nav_new"
+            android:checkable="false"
             android:icon="@drawable/ic_add_circle_black_24px"
             android:title="Add new" />
         <item
