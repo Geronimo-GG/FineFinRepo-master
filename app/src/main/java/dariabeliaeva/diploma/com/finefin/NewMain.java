@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +22,9 @@ import dariabeliaeva.diploma.com.finefin.dao.SpendingsDAO;
 public class NewMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    TabLayout tabs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -28,6 +32,8 @@ public class NewMain extends AppCompatActivity
         setContentView(R.layout.activity_new_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        tabs = (TabLayout) findViewById(R.id.tabs);
 
 
 
@@ -87,6 +93,12 @@ public class NewMain extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if (id != R.id.nav_stat){
+            tabs.setVisibility(View.GONE);
+        }else{
+            tabs.setVisibility(View.VISIBLE);
+        }
+
         if (id == R.id.nav_home) {
             newFragment = new MainList();
             transaction.replace(R.id.content_main, newFragment);
@@ -99,7 +111,8 @@ public class NewMain extends AppCompatActivity
 
         } else if (id == R.id.nav_stat) {
             //newFragment = ;
-            transaction.replace(R.id.content_main, new Diagram());
+            DiagramContainer diagramContainer = new DiagramContainer();
+            transaction.replace(R.id.content_main, diagramContainer);
             transaction.addToBackStack(null);
             transaction.commit();
 
@@ -112,5 +125,9 @@ public class NewMain extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public TabLayout getTabHost() {
+        return tabs;
     }
 }

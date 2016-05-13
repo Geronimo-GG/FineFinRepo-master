@@ -37,6 +37,7 @@ import dariabeliaeva.diploma.com.finefin.data_models.Spendings;
  */
 public class Diagram extends Fragment {
 
+    private boolean outcomes;
 
     public Diagram() {
         // Required empty public constructor
@@ -85,13 +86,17 @@ public class Diagram extends Fragment {
         Legend l = mChart.getLegend();
         l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
 
-        mChart.setData(df.generatePieData(data));
+        mChart.setData(df.generatePieData(data, outcomes));
 
 
 
     }
 
+    public boolean isOutcomes() {
+        return outcomes;
+    }
 
-
-
+    public void setOutcomes(boolean outcomes) {
+        this.outcomes = outcomes;
+    }
 }

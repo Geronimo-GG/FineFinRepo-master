@@ -54,15 +54,11 @@ public class MainList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        getSupportActionBar().setHideOnContentScrollEnabled(true);
-        //inflater.inflate(R.layout.fragment_main_list, container, false);
-
         rootView = inflater.inflate(R.layout.fragment_main_list, container, false);
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //buildAndShowInputDialog();
                 Intent myIntent = new Intent(getActivity(), AddNoteActivity.class);
                 startActivity(myIntent);
             }
@@ -110,7 +106,6 @@ public class MainList extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         provideListInitialization();
     }
 
@@ -153,68 +148,6 @@ public class MainList extends Fragment {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(realmRecyclerView);
-    }
-
-
-    private void buildAndShowInputDialog() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Create New");
-
-        LayoutInflater li = LayoutInflater.from(getActivity());
-        View dialogView = li.inflate(R.layout.to_do_dialog_view, null);
-        final EditText input = (EditText) dialogView.findViewById(R.id.input);
-        final EditText input1 = (EditText) dialogView.findViewById(R.id.input1);
-
-        builder.setView(dialogView);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                addSpenItem(input.getText().toString(), Integer.parseInt(input1.getText().toString()));
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        final AlertDialog dialog = builder.show();
-        input.setOnEditorActionListener(
-                new EditText.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_DONE ||
-                                (event.getAction() == KeyEvent.ACTION_DOWN &&
-                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                            dialog.dismiss();
-                            addSpenItem(input.getText().toString(), Integer.parseInt(input1.getText().toString()));
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-    }
-
-    private void addSpenItem(String spenItemText, int spenSum) {
-        if (spenItemText == null || spenItemText.length() == 0) {
-
-            Toast.makeText(getActivity(), "Could not be empty!", Toast.LENGTH_SHORT)
-                    .show();
-            return;
-
-        }
-
-        realm.beginTransaction();
-        Spendings spenItem = realm.createObject(Spendings.class);
-        spenItem.setId(System.currentTimeMillis());
-        spenItem.setName(spenItemText);
-        spenItem.setPrice(spenSum);
-        spenItem.setDate(dPicker);
-
-        realm.commitTransaction();
-
-        finListAdapter.addSpending(spenItem);
     }
 
 

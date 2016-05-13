@@ -17,10 +17,11 @@ import java.util.Map;
  */
 public class DataFiller {
 
-    public PieData generatePieData(final Map<String, String> imuttData) {
+    public PieData generatePieData(final Map<String, String> imuttData, boolean negativeValues) {
         Map<String, String> data = new HashMap();
         for (String key : imuttData.keySet()){
             if (Float.parseFloat(imuttData.get(key)) > 0){
+
                 data.put(key, imuttData.get(key));
             }
         }
