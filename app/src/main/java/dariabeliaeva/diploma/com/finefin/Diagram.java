@@ -68,11 +68,13 @@ public class Diagram extends Fragment {
         Map<String, String> data = new HashMap<>();
         DataFiller df = new DataFiller();
 
+
         ArrayList<String> categoriesNames = cat.getCatNamesOnly();
         for(String categoryName : categoriesNames){
             data.put(categoryName, spendingsDAO.sumByCat(categoryName) + "");
         }
 
+        if (outcomes) data = invertValues(data);
 
         PieChart mChart = (PieChart) rootView.findViewById(R.id.chart);
         mChart.setDescription("description");
@@ -90,6 +92,15 @@ public class Diagram extends Fragment {
 
 
 
+    }
+
+    private Map<String, String> invertValues(Map<String, String> data) {
+        for (String key : data.keySet()){
+            float value = Float.parseFloat(data.get(key));
+                data.put(key, "" + value * -1);
+
+        }
+        return data;
     }
 
     public boolean isOutcomes() {

@@ -36,6 +36,7 @@ public class DiagramContainer extends Fragment {
 
         fragmentIn = new Diagram();
         fragmentOut = new Diagram();
+        fragmentOut.setOutcomes(true);
 
         setupViewPager(viewPager);
         tabHost.setupWithViewPager(viewPager);
