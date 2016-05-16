@@ -44,9 +44,9 @@ public class SpendingsDAO {
     }
 
 
-    public Long sumByCat (String catName) {
-        long sum = pRealm.where(Spendings.class).equalTo("category", catName).sum("price").longValue();
-        return sum;
+    public Long sumByCat (String catName, Date date) {
+        if (date == null) return pRealm.where(Spendings.class).equalTo("category", catName).sum("price").longValue();
+        else return pRealm.where(Spendings.class).greaterThan("date", date).equalTo("category", catName).sum("price").longValue();
     }
 
 

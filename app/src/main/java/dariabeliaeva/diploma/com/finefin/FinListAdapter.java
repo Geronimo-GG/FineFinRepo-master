@@ -2,6 +2,7 @@ package dariabeliaeva.diploma.com.finefin;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -52,7 +53,12 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
         date = spenItem.getDate();
         //date_today = ;
 
-        formated = DateFormat.getDateInstance().format(date);
+//        formated = DateFormat.getDateInstance().format(date);
+        formated = DateUtils.getRelativeTimeSpanString(
+                date.getTime(),
+                System.currentTimeMillis(),
+                0,
+                DateUtils.FORMAT_ABBREV_RELATIVE).toString();
         if(spenItem.getPrice() > 0) {
             holder.priceTextView.setText("+" + spenItem.getPrice());
             holder.priceTextView.setTextColor(Color.argb(255, 0, 50, 0));

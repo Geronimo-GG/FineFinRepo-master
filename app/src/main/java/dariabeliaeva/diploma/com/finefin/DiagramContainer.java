@@ -14,7 +14,10 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TabHost;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import dariabeliaeva.diploma.com.finefin.adapter.CustomSpinnerAdapter;
 
@@ -24,11 +27,13 @@ import dariabeliaeva.diploma.com.finefin.adapter.CustomSpinnerAdapter;
  */
 public class DiagramContainer extends Fragment {
 
+    public final int DAY = 0, WEEK = 1, MONTH = 2, ALL_TIME = 3;
+
     private View rootView;
     private ViewPager viewPager;
     private TabLayout tabHost;
     private SpinnerAdapter spinnerAdapter;
-
+    private ArrayList<String> items;
     private Diagram fragmentIn, fragmentOut;
 
     public DiagramContainer() {
@@ -55,9 +60,21 @@ public class DiagramContainer extends Fragment {
 
     private void initSpinner() {
         Spinner spinner = ((NewMain) getActivity()).getSpinner();
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                fragmentIn.setDate(getDateFor(i));
+                fragmentOut.setDate(getDateFor(i));
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                fragmentIn.setDate(getDateFor(DAY));
+                fragmentOut.setDate(getDateFor(DAY));
+            }
+        });
 
-        ArrayList<String> items = new ArrayList<>();
+        items = new ArrayList<>();
         items.add("Day");
         items.add("Week");
         items.add("Month");
@@ -65,6 +82,24 @@ public class DiagramContainer extends Fragment {
 
         spinnerAdapter = new CustomSpinnerAdapter(getActivity(), items);
         spinner.setAdapter(spinnerAdapter);
+
+    }
+
+    private Date getDateFor(int week) {
+        Calendar calendar = Calendar.getInstance();
+        switch (week){
+            case DAY:
+                calendar.add(Calendar.DAY_OF_YEAR, -1);
+                break;
+            case WEEK:
+                calendar.add(Calendar.WEEK_OF_YEAR, -1);
+                break;
+            case MONTH:
+                calendar.add(Calendar.MONTH, -1);
+                break;
+            default: return null;
+        }
+        return calendar.getTime();
 
     }
 

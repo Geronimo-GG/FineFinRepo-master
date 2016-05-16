@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +32,7 @@ public class Diagram extends Fragment {
     private boolean outcomes;
     private RecyclerView categoriesList;
     private float sum = 0;
+    private Date date;
 
     public Diagram() {
         // Required empty public constructor
@@ -92,7 +95,7 @@ public class Diagram extends Fragment {
 
         ArrayList<String> categoriesNames = cat.getCatNamesOnly();
         for(String categoryName : categoriesNames){
-            data.put(categoryName, spendingsDAO.sumByCat(categoryName) + "");
+            data.put(categoryName, spendingsDAO.sumByCat(categoryName, date) + "");
         }
         initCategoriesList(data);
 
@@ -116,7 +119,11 @@ public class Diagram extends Fragment {
         Legend l = mChart.getLegend();
         l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
 
-        mChart.setData(df.generatePieData(data, outcomes));
+
+        PieData pieData = df.generatePieData(data, outcomes);
+        if (pieData.getYValueSum() == 0) mChart.setCenterText("Empty");
+        mChart.setData(pieData);
+        mChart.invalidate();
 
 
 
@@ -145,5 +152,11 @@ public class Diagram extends Fragment {
 
     public void setOutcomes(boolean outcomes) {
         this.outcomes = outcomes;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+        if (rootView != null) initData();
+
     }
 }
