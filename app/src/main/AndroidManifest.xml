@@ -18,7 +18,8 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--here-->
+
+            <!-- here -->
         </activity>
         <activity
             android:name=".AddNoteActivity"
@@ -40,6 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HelloNameActivity"></activity>
     </application>
 
 </manifest>

@@ -31,10 +31,6 @@ import dariabeliaeva.diploma.com.finefin.dao.SpendingsDAO;
 import dariabeliaeva.diploma.com.finefin.data_models.Categories;
 import dariabeliaeva.diploma.com.finefin.data_models.Spendings;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Diagram extends Fragment {
 
 
