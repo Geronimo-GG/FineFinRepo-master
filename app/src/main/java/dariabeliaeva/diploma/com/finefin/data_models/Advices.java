@@ -1,11 +1,12 @@
 package dariabeliaeva.diploma.com.finefin.data_models;
 
+import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Dari on 5/13/2016.
  */
-public class Advices {
+public class Advices  extends RealmObject {
 
     @PrimaryKey
     private long id;
@@ -16,6 +17,11 @@ public class Advices {
         this.id = id;
         this.advice = advice;
         this.counter = counter;
+    }
+
+    public Advices(long id, String advice) {
+        this.id = id;
+        this.advice = advice;
     }
 
     public Advices() {
