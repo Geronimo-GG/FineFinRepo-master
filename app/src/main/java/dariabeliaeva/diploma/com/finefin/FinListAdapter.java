@@ -16,9 +16,7 @@ import java.util.Date;
 import dariabeliaeva.diploma.com.finefin.data_models.Spendings;
 import io.realm.Realm;
 
-/**
- * Created by andrew on 28.03.16.
- */
+
 public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.SpendingsViewHolder> {
 
     private Realm realm = Realm.getDefaultInstance();

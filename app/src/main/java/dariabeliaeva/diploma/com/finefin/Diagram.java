@@ -23,10 +23,6 @@ import dariabeliaeva.diploma.com.finefin.charts.DataFiller;
 import dariabeliaeva.diploma.com.finefin.dao.CategoriesDAO;
 import dariabeliaeva.diploma.com.finefin.dao.SpendingsDAO;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Diagram extends Fragment {
 
     private boolean outcomes;
