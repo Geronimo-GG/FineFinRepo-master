@@ -1,12 +1,13 @@
 package dariabeliaeva.diploma.com.finefin.data_models;
 
 import io.realm.RealmList;
+import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Dari on 5/16/2016.
  */
-public class Budget {
+public class Budget extends RealmObject {
 
     private long monthly_income;
     private long difference_balance;
