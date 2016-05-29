@@ -65,6 +65,7 @@ public class BudgetFragment extends Fragment {
         categoriesList.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoriesList.setAdapter(categoriesAdapter);
 
+
         ArrayList<String> categoriesNames = new ArrayList<>();
         ArrayList<Categories> categories = new ArrayList<>();
         categories.addAll(realm
