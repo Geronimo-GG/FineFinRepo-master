@@ -10,7 +10,7 @@
         android:id="@+id/main.backdrop"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:src="@drawable/bgpic"
+        android:src="@drawable/waves"
         android:scaleType="centerCrop" />
 
 
@@ -40,6 +40,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="BALANCE"
         android:id="@+id/tvBalance"
+        android:textColor="#ffffff"
+        android:textSize="28dp"
         android:layout_above="@+id/fin_list"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="54dp" />
