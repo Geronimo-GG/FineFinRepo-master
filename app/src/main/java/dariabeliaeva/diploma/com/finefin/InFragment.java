@@ -19,7 +19,8 @@ import dariabeliaeva.diploma.com.finefin.data_models.Spendings;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class InFragment extends Fragment {
+public class
+InFragment extends Fragment {
 
     CatListAdapter catLA = new CatListAdapter();
     View rootView;
@@ -46,7 +47,7 @@ public class InFragment extends Fragment {
         //catLA = new FinListAdapter();
         catLA.setCats(catsItemsArrayList);
         RecyclerView realmRecyclerView = (RecyclerView) rootView.findViewById(R.id.cat_list);
-        realmRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        realmRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         realmRecyclerView.setAdapter(catLA);
         //realmRecyclerView.setNestedScrollingEnabled(false);
 

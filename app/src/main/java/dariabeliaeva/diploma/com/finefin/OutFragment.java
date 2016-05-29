@@ -41,7 +41,7 @@ public class OutFragment extends Fragment {
         //catLA = new FinListAdapter();
         catLA.setCats(catsItemsArrayList);
         RecyclerView realmRecyclerView = (RecyclerView) rootView.findViewById(R.id.cat_list);
-        realmRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        realmRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         realmRecyclerView.setAdapter(catLA);
         //realmRecyclerView.setNestedScrollingEnabled(false);
 

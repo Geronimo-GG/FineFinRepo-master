@@ -1,10 +1,12 @@
 package dariabeliaeva.diploma.com.finefin;
 
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -48,14 +50,18 @@ public class CatListAdapter extends RecyclerView.Adapter<CatListAdapter.Categori
     public void onBindViewHolder(final CategoriesViewHolder holder, final int position) {
         Categories catItems = cats.get(position);
         holder.spenTextView.setText(catItems.getCat_name());
-
+        holder.image.setImageResource(catItems.getIcon_id());
+//
         if (selected == cats.get(position))
         {
-            holder.spenCardView.setCardBackgroundColor(Color.DKGRAY);
+            holder.image.setBackgroundResource(R.drawable.circle);
         }
-        else holder.spenCardView.setCardBackgroundColor(Color.WHITE);
+        else {
+            holder.image.setBackgroundResource(0);
 
-        holder.spenCardView.setOnClickListener(
+        }
+
+        holder.image.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -100,11 +106,13 @@ public class CatListAdapter extends RecyclerView.Adapter<CatListAdapter.Categori
     class CategoriesViewHolder extends RecyclerView.ViewHolder {
 
         public TextView spenTextView;
-        public CardView spenCardView;
+//        public CardView spenCardView;
+        public ImageView image;
         public CategoriesViewHolder(View rootView) {
             super(rootView);
             this.spenTextView = (TextView) rootView.findViewById(R.id.todo_text_view);
-            this.spenCardView = (CardView) rootView.findViewById(R.id.cvCat);
+//            this.spenCardView = (CardView) rootView.findViewById(R.id.cvCat);
+            this.image = (ImageView) rootView.findViewById(R.id.imageView2);
         }
     }
 }
