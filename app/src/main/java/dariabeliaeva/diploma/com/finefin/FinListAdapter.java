@@ -8,6 +8,8 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,17 +23,8 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
 
     private Realm realm = Realm.getDefaultInstance();
 
-
     ArrayList<Spendings> spendings = new ArrayList<>();
-    private static final int[] COLORS = new int[] {
-            Color.argb(40, 128, 0, 0),
-            Color.argb(40, 255, 0, 0),
-            Color.argb(40, 0, 128, 128),
-            Color.argb(40, 112,128,144),
-            Color.argb(40, 255,239,213),
-            Color.argb(40, 72,209,204)
-    };
-
+    private static final int[] COLORS = ColorTemplate.COLORFUL_COLORS;
 
     FinListAdapter(){}
 
@@ -47,25 +40,25 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
         Date date, date_today;
         Spendings spenItem = spendings.get(position);
         holder.spenTextView.setText(spenItem.getName());
-        date = spenItem.getDate();
+//        date = spenItem.getDate();
         //date_today = ;
 
-        formated = DateFormat.getDateInstance().format(date);
+//        formated = DateFormat.getDateInstance().format(date);
 
         if(spenItem.getPrice() > 0) {
             holder.priceTextView.setText("+" + spenItem.getPrice());
-            holder.priceTextView.setTextColor(Color.argb(255, 0, 50, 0));
+            holder.priceTextView.setTextColor(Color.parseColor("#00c853"));
 
         }
         else {
             holder.priceTextView.setText(spenItem.getPrice() + "");
-            holder.priceTextView.setTextColor(Color.argb(255, 102, 0, 0));
+            holder.priceTextView.setTextColor(Color.parseColor("#dd2c00"));
         }
         holder.catTextView.setText(spenItem.getCategory());
-        holder.dateTextView.setText(formated);
-        holder.relativeLayout.setBackgroundColor(
-                COLORS[(int) (spenItem.getId() % COLORS.length)]
-        );
+//        holder.dateTextView.setText(formated);
+//        holder.relativeLayout.setBackgroundColor(
+//                COLORS[0]
+//        );
     }
 
     @Override
@@ -98,7 +91,7 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
         public TextView priceTextView;
         public TextView catTextView;
         public RelativeLayout relativeLayout;
-        public TextView dateTextView;
+//        public TextView dateTextView;
 
         public SpendingsViewHolder(View rootView) {
             super(rootView);
@@ -106,7 +99,7 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
             this.priceTextView = (TextView) rootView.findViewById(R.id.price_text_view);
             this.catTextView = (TextView) rootView.findViewById(R.id.todo_text_view);
             this.relativeLayout = (RelativeLayout) rootView.findViewById(R.id.list_cell);
-            this.dateTextView = (TextView) rootView.findViewById(R.id.date_text_view);
+//            this.dateTextView = (TextView) rootView.findViewById(R.id.date_text_view);
         }
     }
 

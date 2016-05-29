@@ -26,7 +26,7 @@ public class BudgetListAdapter {
             this.priceTextView = (TextView) rootView.findViewById(R.id.price_text_view);
             this.catTextView = (TextView) rootView.findViewById(R.id.todo_text_view);
             this.relativeLayout = (RelativeLayout) rootView.findViewById(R.id.list_cell);
-            this.dateTextView = (TextView) rootView.findViewById(R.id.date_text_view);
+//            this.dateTextView = (TextView) rootView.findViewById(R.id.date_text_view);
         }
     }
 }
