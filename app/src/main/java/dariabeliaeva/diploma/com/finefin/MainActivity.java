@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import dariabeliaeva.diploma.com.finefin.adapter.SimpleDividerItemDecoration;
 import dariabeliaeva.diploma.com.finefin.dao.AdvicesDAO;
 import dariabeliaeva.diploma.com.finefin.dao.CategoriesDAO;
 import dariabeliaeva.diploma.com.finefin.dao.SpendingsDAO;
@@ -129,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView realmRecyclerView = (RecyclerView) findViewById(R.id.fin_list);
         realmRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         realmRecyclerView.setAdapter(finListAdapter);
+        realmRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
         realmRecyclerView.setNestedScrollingEnabled(false);
         rezult = finListAdapter.UpdateBalance();
         setTitle("Balance: " + rezult);

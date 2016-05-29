@@ -44,7 +44,7 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
         CategoriesDAO categoriesDAO = new CategoriesDAO();
         Spendings spenItem = spendings.get(position);
         holder.spenTextView.setText(spenItem.getName());
-        icon_id = categoriesDAO.getIcon(holder.catTextView.toString());
+        icon_id = categoriesDAO.getIcon(spenItem.getCategory());
 //        date = spenItem.getDate();
         //date_today = ;
 

@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/list_cell"
-    android:background="#eeeeee">
+    android:id="@+id/list_cell">
 
     <TextView
         android:id="@+id/todo_text_view"
@@ -15,7 +14,8 @@
         android:text="Main Text"
         android:textSize="24sp"
         android:textColor="@android:color/black"
-        android:layout_toRightOf="@+id/imageView" />
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/price_text_view"
@@ -26,7 +26,8 @@
         android:textSize="24sp"
         android:textColor="@android:color/white"
         android:layout_alignEnd="@+id/todo_text_view"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,9 +36,9 @@
         android:text="Small Text"
         android:id="@+id/textView"
         android:layout_alignParentEnd="false"
-        android:layout_margin="8dp"
         android:layout_toRightOf="@+id/imageView"
-        android:layout_below="@+id/todo_text_view" />
+        android:layout_below="@+id/todo_text_view"
+        android:layout_marginLeft="16dp" />
 
     <ImageView
         android:layout_width="48dp"
@@ -47,5 +48,6 @@
         android:layout_alignParentStart="true"
         android:src="@drawable/ic_monetization_on_white_24px"
         android:scaleType="fitCenter"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp" />
 </RelativeLayout>

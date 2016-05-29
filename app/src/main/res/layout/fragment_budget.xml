@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="dariabeliaeva.diploma.com.finefin.BudgetFragment">
+    tools:context="dariabeliaeva.diploma.com.finefin.BudgetFragment"
+    android:background="#FFFFFF">
 
    <TextView
        android:layout_width="match_parent"
