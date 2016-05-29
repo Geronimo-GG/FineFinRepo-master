@@ -193,6 +193,8 @@ public class NewMain extends AppCompatActivity
 
     private void showRandomAdvice(Realm realm) {
         RealmResults<Advices> res = realm.where(Advices.class).findAll();
+
+        if (res.size() == 0) return;
         Advices advices = res.get(new Random().nextInt(res.size()));
         new AlertDialog.Builder(this)
                 .setMessage(advices.getAdvice())
