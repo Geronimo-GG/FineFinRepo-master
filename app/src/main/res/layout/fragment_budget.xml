@@ -9,18 +9,23 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_marginTop="30dp"
-       android:layout_marginLeft="30dp"
+       android:layout_marginLeft="20dp"
        android:text="Monthly income:"
        android:textSize="25dp"
-       android:id="@+id/textView2" />
+       android:id="@+id/textView2"
+       android:layout_alignEnd="@+id/tvIncomeLeft" />
 
     <EditText
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:inputType="numberSigned"
         android:layout_marginRight="30dp"
+        android:textSize="20dp"
+        android:hint="Sum"
+        android:gravity="center"
         android:id="@+id/monthly_incomes"
         android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
         android:layout_alignParentEnd="true" />
 
     <View
