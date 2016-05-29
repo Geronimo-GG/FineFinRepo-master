@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list_cell">
+
+    <TextView
+        android:id="@+id/todo_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="4dp"
+        android:text="Main Text"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/price_text_view"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="4dp"
+        android:text="summ"
+        android:textSize="24sp"
+        android:layout_marginEnd="43dp"
+        android:layout_alignTop="@+id/todo_text_view"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true" />
+
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/ic_monetization_on_white_24px"
+        android:scaleType="fitCenter" />
+</RelativeLayout>

@@ -16,7 +16,7 @@
 
     <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/fin_list"
         android:layout_alignParentTop="false"
         android:layout_alignParentStart="false"
@@ -44,6 +44,6 @@
         android:textSize="28dp"
         android:layout_above="@+id/fin_list"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="54dp" />
+        android:layout_marginBottom="72dp" />
 
 </RelativeLayout>
