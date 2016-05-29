@@ -74,8 +74,8 @@ public class MainList extends Fragment {
 
         dPicker.getDate();
 
-        spendings.add(new Spendings(1, "no transport ever", 10, dPicker, "Transport"));
-        spendings.add(new Spendings(2, "salary is mine now", 12, dPicker, "Salary"));
+//        spendings.add(new Spendings(1, "no transport ever", 10, dPicker, "Transport"));
+//        spendings.add(new Spendings(2, "salary is mine now", 12, dPicker, "Salary"));
         //cats.add(new Spendings(3, "soda", 9.5, "09-23-2015", ));
         //cats.add(new Spendings(4, "juice", 20, "09-23-2012", ));
         //cats.add(new Spendings(5, "vodka", 90, "12-23-2012", ));
