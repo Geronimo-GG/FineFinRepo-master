@@ -87,4 +87,17 @@ public class CategoriesDAO {
 
         return sumByCat;
     }
+
+    public int getIcon (String name)
+    {
+        int icon_id;
+        Categories cat = new Categories();
+        RealmResults<Categories> categories =
+                pRealm.where(Categories.class).findAll();
+        List<Categories> categoriesAll = new ArrayList<>();
+        categoriesAll.addAll(categories);
+        cat = categoriesAll.get(0);
+        icon_id = cat.getIcon_id();
+        return icon_id;
+    }
 }

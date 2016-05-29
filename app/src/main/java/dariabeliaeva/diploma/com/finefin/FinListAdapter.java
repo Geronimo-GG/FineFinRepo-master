@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import dariabeliaeva.diploma.com.finefin.dao.CategoriesDAO;
 import dariabeliaeva.diploma.com.finefin.data_models.Spendings;
 import io.realm.Realm;
 
@@ -38,8 +40,11 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
     public void onBindViewHolder(SpendingsViewHolder holder, int position) {
         String formated, formated_today;
         Date date, date_today;
+        int icon_id;
+        CategoriesDAO categoriesDAO = new CategoriesDAO();
         Spendings spenItem = spendings.get(position);
         holder.spenTextView.setText(spenItem.getName());
+        icon_id = categoriesDAO.getIcon(holder.catTextView.toString());
 //        date = spenItem.getDate();
         //date_today = ;
 
@@ -55,6 +60,7 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
             holder.priceTextView.setTextColor(Color.parseColor("#dd2c00"));
         }
         holder.catTextView.setText(spenItem.getCategory());
+        holder.imageView.setImageResource(icon_id);
 //        holder.dateTextView.setText(formated);
 //        holder.relativeLayout.setBackgroundColor(
 //                COLORS[0]
@@ -91,6 +97,7 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
         public TextView priceTextView;
         public TextView catTextView;
         public RelativeLayout relativeLayout;
+        public ImageView imageView;
 //        public TextView dateTextView;
 
         public SpendingsViewHolder(View rootView) {
@@ -99,6 +106,7 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
             this.priceTextView = (TextView) rootView.findViewById(R.id.price_text_view);
             this.catTextView = (TextView) rootView.findViewById(R.id.todo_text_view);
             this.relativeLayout = (RelativeLayout) rootView.findViewById(R.id.list_cell);
+            this.imageView = (ImageView) rootView.findViewById(R.id.imageView);
 //            this.dateTextView = (TextView) rootView.findViewById(R.id.date_text_view);
         }
     }
