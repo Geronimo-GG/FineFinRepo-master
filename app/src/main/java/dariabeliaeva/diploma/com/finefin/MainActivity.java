@@ -86,17 +86,6 @@ public class MainActivity extends AppCompatActivity {
 //
         realm.commitTransaction();
 
-        CategoriesDAO cat = new CategoriesDAO();
-        realm.beginTransaction();
-        realm.clear(Categories.class);
-        realm.commitTransaction();
-        cat.addCategory("Transport", "outcome");
-        cat.addCategory("Food", "outcome");
-        cat.addCategory("Fun", "outcome");
-        cat.addCategory("Shopping", "outcome");
-        cat.addCategory("Salary", "income");
-        cat.addCategory("Lottery", "income");
-        cat.addCategory("Gift", "income");
 
         addAllAdvices();
 

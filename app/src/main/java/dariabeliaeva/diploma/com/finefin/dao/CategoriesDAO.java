@@ -20,11 +20,12 @@ public class CategoriesDAO {
     private Realm pRealm = Realm.getDefaultInstance();
 
 
-    public void addCategory(String name, String type) {
+    public void addCategory(String name, String type, int icon_id) {
         Categories cat = new Categories();
         cat.setCategory_id(System.currentTimeMillis());
         cat.setCat_name(name);
         cat.setType(type);
+        cat.setIcon_id(icon_id);
 
         pRealm.beginTransaction();
         pRealm.copyToRealmOrUpdate(cat);

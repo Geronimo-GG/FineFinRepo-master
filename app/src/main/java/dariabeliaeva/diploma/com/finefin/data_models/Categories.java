@@ -17,15 +17,16 @@ public class Categories extends RealmObject {
     @PrimaryKey
     private long category_id;
     private String cat_name;
-    //private String icon;
+    private int icon_id;
     //private String bg_color;
     private String type;
     private RealmList <Spendings> spendings;
 
 
-    public Categories(long category_id, String cat_name, String type, RealmList<Spendings> spendings) {
+    public Categories(long category_id, String cat_name, int icon_id, String type, RealmList<Spendings> spendings) {
         this.category_id = category_id;
         this.cat_name = cat_name;
+        this.icon_id = icon_id;
         this.type = type;
         this.spendings = spendings;
     }
@@ -47,6 +48,14 @@ public class Categories extends RealmObject {
 
     public void setCat_name(String cat_name) {
         this.cat_name = cat_name;
+    }
+
+    public int getIcon_id() {
+        return icon_id;
+    }
+
+    public void setIcon_id(int icon_id) {
+        this.icon_id = icon_id;
     }
 
     /*public String getIcon() {
