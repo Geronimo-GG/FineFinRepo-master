@@ -81,6 +81,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
+    public void add(String catName, String catPrice){
+        categories.put(catName, catPrice);
+        notifyDataSetChanged();
+    }
 
     static class CategoriesViewHolder extends RecyclerView.ViewHolder{
         private TextView tvCatName, tvCatTotalPrice;

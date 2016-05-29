@@ -129,6 +129,13 @@ public class NewMain extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.nav_plan) {
+            toolbar.setTitle("Plan budget");
+
+            //newFragment = ;
+            BudgetFragment budgetFragment = new BudgetFragment();
+            transaction.replace(R.id.content_main, budgetFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
         } else if (id == R.id.nav_send) {
 
