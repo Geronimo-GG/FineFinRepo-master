@@ -189,14 +189,14 @@ public class MainList extends Fragment {
         cat.addCategory("Food & Drinks", "outcome", R.drawable.ic_local_dining_white_24px);
         cat.addCategory("Bills", "outcome", R.drawable.ic_list_white_24px);
         cat.addCategory("Family", "outcome", R.drawable.ic_people_outline_white_24px);
-        cat.addCategory("Entertainment", "outcome", R.drawable.ic_theaters_white_24px);
+        cat.addCategory("Fun", "outcome", R.drawable.ic_theaters_white_24px);
         cat.addCategory("Home", "outcome", R.drawable.ic_home_white_24px);
         cat.addCategory("Utilities", "outcome", R.drawable.ic_settings_input_component_white_24px);
         cat.addCategory("Shopping", "outcome", R.drawable.ic_shopping_cart_white_24px);
         cat.addCategory("Healthcare", "outcome", R.drawable.ic_local_hospital_white_24px);
         cat.addCategory("Clothing", "outcome", R.drawable.ic_accessibility_white_24px);
         cat.addCategory("Other", "outcome", R.drawable.ic_local_atm_white_24px);
-        cat.addCategory("Transportation", "outcome", R.drawable.ic_directions_subway_white_24px);
+        cat.addCategory("Transport", "outcome", R.drawable.ic_directions_subway_white_24px);
         cat.addCategory("Education", "outcome", R.drawable.ic_school_white_24px);
         cat.addCategory("Drinks", "outcome", R.drawable.ic_local_bar_white_24px);
         cat.addCategory("Hobbies", "outcome", R.drawable.ic_color_lens_white_24px);
