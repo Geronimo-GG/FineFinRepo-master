@@ -26,16 +26,18 @@ import dariabeliaeva.diploma.com.finefin.data_models.Categories;
 
 public class AddNoteActivity extends AppCompatActivity {
 
-    int spenSum;
-    Date spenDate;
-    String spenDesc;
-    String catName;
-    OutFragment outFrag = new OutFragment();
-    InFragment inFrag = new InFragment();
-    TabLayout tab;
-    SpendingsDAO spenDAO = new SpendingsDAO();
-    Date date = new Date();
-    Toolbar toolbar;
+    private int spenSum;
+    private Date spenDate;
+    private String spenDesc;
+    private String catName;
+    private OutFragment outFrag = new OutFragment();
+    private InFragment inFrag = new InFragment();
+    private TabLayout tab;
+    private SpendingsDAO spenDAO = new SpendingsDAO();
+    private Date date = new Date();
+    private Toolbar toolbar;
+    private EditText expText;
+    private EditText descText;
 
 
 
@@ -52,8 +54,8 @@ public class AddNoteActivity extends AppCompatActivity {
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 
         final TextView editTxt = (TextView) findViewById(R.id.tvData);
-        final EditText expText = (EditText) findViewById(R.id.tvExp);
-        final EditText descText = (EditText) findViewById(R.id.description);
+        expText = (EditText) findViewById(R.id.tvExp);
+        descText = (EditText) findViewById(R.id.description);
 
 
 
@@ -76,38 +78,6 @@ public class AddNoteActivity extends AppCompatActivity {
         }, mYear, mMonth, mDay
         );
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                if (expText.getText().toString().length() == 0){
-                    Snackbar.make(fab, "Please fill price", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                spenSum = Integer.parseInt(expText.getText().toString());
-                spenDate = date;
-                spenDesc = descText.getText().toString();
-                Categories selected;
-                if (tab.getSelectedTabPosition() == 0){
-                    selected = outFrag.getSelected();
-                }else{
-                    selected = inFrag.getSelected();
-                }
-                if (selected == null) selected = outFrag.getSelected();
-                if (selected == null) selected = inFrag.getSelected();
-
-                catName = selected.getCat_name();
-                if (selected.getType().equals("outcome")) {
-                    spenSum = spenSum * (-1);
-                }
-
-                spenDAO.addSpendings(spenDesc, spenSum, spenDate, catName, selected);
-                finish();
-
-            }
-        });
-
         editTxt.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -123,6 +93,42 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_spending_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_send){
+            if (expText.getText().toString().length() == 0){
+                Snackbar.make(expText, "Please fill price", Snackbar.LENGTH_SHORT).show();
+                return true;
+            }
+            spenSum = Integer.parseInt(expText.getText().toString());
+            spenDate = date;
+            spenDesc = descText.getText().toString();
+            Categories selected;
+            if (tab.getSelectedTabPosition() == 0){
+                selected = outFrag.getSelected();
+            }else{
+                selected = inFrag.getSelected();
+            }
+            if (selected == null) selected = outFrag.getSelected();
+            if (selected == null) selected = inFrag.getSelected();
+
+            catName = selected.getCat_name();
+            if (selected.getType().equals("outcome")) {
+                spenSum = spenSum * (-1);
+            }
+
+            spenDAO.addSpendings(spenDesc, spenSum, spenDate, catName, selected);
+            finish();
+            return true;
+        }
+        return false;
+    }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
