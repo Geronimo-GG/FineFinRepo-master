@@ -1,6 +1,7 @@
 package dariabeliaeva.diploma.com.finefin;
 
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,12 +53,12 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
 
         if(spenItem.getPrice() > 0) {
             holder.priceTextView.setText("+" + spenItem.getPrice());
-            holder.priceTextView.setTextColor(Color.parseColor("#00c853"));
+            holder.priceTextView.setTextColor(Color.parseColor("#00c27a"));
 
         }
         else {
             holder.priceTextView.setText(spenItem.getPrice() + "");
-            holder.priceTextView.setTextColor(Color.parseColor("#dd2c00"));
+            holder.priceTextView.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.colorPrimary));
         }
         holder.catTextView.setText(spenItem.getCategory());
         holder.imageView.setImageResource(icon_id);

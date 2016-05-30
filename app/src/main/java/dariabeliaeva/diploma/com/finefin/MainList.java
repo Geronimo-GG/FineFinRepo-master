@@ -114,15 +114,18 @@ public class MainList extends Fragment {
         spenItemsArrayList.addAll(spenItems);
         final long rezult;
 
+
         finListAdapter = new FinListAdapter();
         Collections.reverse(spenItemsArrayList);
         finListAdapter.setSpendings(spenItemsArrayList);
         RecyclerView realmRecyclerView = (RecyclerView) rootView.findViewById(R.id.fin_list);
+        realmRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         realmRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         realmRecyclerView.setAdapter(finListAdapter);
+
         rezult = finListAdapter.UpdateBalance();
         final TextView txtBal = (TextView) rootView.findViewById(R.id.tvBalance);
-        txtBal.setText("Balance: " + rezult);
+        txtBal.setText("" + rezult);
 
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -138,7 +141,7 @@ public class MainList extends Fragment {
                 realm.commitTransaction();
                 finListAdapter.removeSpending(viewHolder.getAdapterPosition());
                 float balance = finListAdapter.UpdateBalance();
-                txtBal.setText("Balance: " + balance);
+                txtBal.setText("" + balance);
 
             }
         };

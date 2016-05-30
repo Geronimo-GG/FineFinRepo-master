@@ -10,13 +10,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:padding="4dp"
         android:text="Main Text"
         android:textSize="24sp"
         android:textColor="@android:color/black"
         android:fontFamily="sans-serif-condensed"
         android:layout_toRightOf="@+id/imageView"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp" />
 
     <TextView
         android:id="@+id/price_text_view"
@@ -38,8 +38,8 @@
         android:id="@+id/textView"
         android:layout_alignParentEnd="false"
         android:layout_toRightOf="@+id/imageView"
-        android:layout_below="@+id/todo_text_view"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginLeft="16dp"
+        android:layout_below="@+id/todo_text_view" />
 
     <ImageView
         android:layout_width="48dp"
@@ -50,5 +50,18 @@
         android:src="@drawable/ic_monetization_on_white_24px"
         android:scaleType="fitCenter"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginLeft="16dp"
+        android:padding="8dp"
+        android:background="@drawable/circle"
+        android:tint="#787878"
+        android:tintMode="src_in"
+        android:layout_marginTop="8dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_toEndOf="@+id/imageView"
+        android:background="#1a000000"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="8dp" />
 </RelativeLayout>

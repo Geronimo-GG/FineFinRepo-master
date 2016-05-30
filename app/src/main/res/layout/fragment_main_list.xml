@@ -38,12 +38,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="BALANCE"
+        android:text="$60000"
         android:id="@+id/tvBalance"
         android:textColor="#ffffff"
-        android:textSize="28dp"
+        android:textSize="28sp"
         android:layout_above="@+id/fin_list"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="72dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Balance:"
+        android:id="@+id/textView6"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:layout_above="@+id/tvBalance"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
