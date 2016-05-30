@@ -1,11 +1,12 @@
 package dariabeliaeva.diploma.com.finefin.data_models;
 
+import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Dari on 5/16/2016.
  */
-public class FinancialGoals {
+public class FinancialGoals extends RealmObject {
 
     @PrimaryKey
     private long goal_id;
