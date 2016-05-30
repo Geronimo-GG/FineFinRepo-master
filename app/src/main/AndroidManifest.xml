@@ -41,7 +41,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HelloNameActivity"></activity>
+        <activity android:name=".HelloNameActivity" />
+        <activity android:name=".AddFinancialGoalActivity"></activity>
     </application>
 
 </manifest>

@@ -71,8 +71,8 @@ public class GoalsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private void setupItemView(GoalsViewHolder holder, int position) {
         ArrayList<String> keys = new ArrayList<>(goals.keySet());
-        holder.tvCatName.setText(keys.get(position));
-        holder.tvCatTotalPrice.setText(goals.get(keys.get(position)));
+        holder.todo_text_view.setText(keys.get(position));
+        holder.price_text_view.setText(goals.get(keys.get(position)));
     }
 
     public void setCategories(Map<String, String> categories) {
@@ -86,12 +86,12 @@ public class GoalsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     static class GoalsViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvCatName, tvCatTotalPrice;
+        private TextView todo_text_view, price_text_view;
 
         public GoalsViewHolder(View itemView) {
             super(itemView);
-            tvCatName = (TextView) itemView.findViewById(R.id.tvCatName);
-            tvCatTotalPrice = (TextView) itemView.findViewById(R.id.tvCatTotalPrice);
+            todo_text_view = (TextView) itemView.findViewById(R.id.todo_text_view);
+            price_text_view = (TextView) itemView.findViewById(R.id.price_text_view);
 
         }
     }
