@@ -2,7 +2,9 @@ package dariabeliaeva.diploma.com.finefin;
 
 
 import android.app.Fragment;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -102,7 +104,9 @@ public class    Diagram extends Fragment {
         mChart.setDescription("");
 
 
-        mChart.setCenterTextSize(10f);
+        mChart.setCenterTextSize(18f);
+        mChart.setCenterTextTypeface(Typeface.DEFAULT_BOLD);
+        mChart.setCenterTextColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
         mChart.getLegend().setEnabled(false);
         mChart.setDrawSliceText(false);
 
@@ -114,6 +118,7 @@ public class    Diagram extends Fragment {
 
         PieData pieData = df.generatePieData(data, outcomes);
         initCategoriesList(bufData, pieData.getColors());
+        mChart.setCenterText("$" + pieData.getYValueSum());
 
         if (pieData.getYValueSum() == 0) mChart.setCenterText("Empty");
         mChart.setData(pieData);

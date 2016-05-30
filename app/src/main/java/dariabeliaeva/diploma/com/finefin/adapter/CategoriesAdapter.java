@@ -76,7 +76,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private void setupItemView(CategoriesViewHolder holder, int position) {
         ArrayList<String> keys = new ArrayList<>(categories.keySet());
         holder.tvCatName.setText(keys.get(position));
-        holder.tvCatTotalPrice.setText(categories.get(keys.get(position)));
+        holder.tvCatTotalPrice.setText(categories.get(keys.get(position)) + "$");
         holder.imageColor.setColorFilter(colors[position]);
     }
 
