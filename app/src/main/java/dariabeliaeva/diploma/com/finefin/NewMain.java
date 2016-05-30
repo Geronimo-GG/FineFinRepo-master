@@ -130,7 +130,7 @@ public class NewMain extends AppCompatActivity
             this.startActivity(intent);
 
         } else if (id == R.id.nav_stat) {
-            toolbar.setTitle("Statistic");
+            toolbar.setTitle("");
 
             //newFragment = ;
             DiagramContainer diagramContainer = new DiagramContainer();

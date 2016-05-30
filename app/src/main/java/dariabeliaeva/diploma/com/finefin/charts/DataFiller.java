@@ -29,16 +29,17 @@ public class DataFiller {
         ArrayList<String> xVals = new ArrayList<>(data.keySet());
 
         for(int i = 0; i < xVals.size(); i++) {
-                entries1.add(new Entry(Float.parseFloat(data.get(xVals.get(i))), i));
+            entries1.add(new Entry(Float.parseFloat(data.get(xVals.get(i))), i));
         }
 
-        PieDataSet ds1 = new PieDataSet(entries1, "Categories");
+        PieDataSet ds1 = new PieDataSet(entries1, "");
         ds1.setColors(ColorTemplate.PASTEL_COLORS);
         ds1.setSliceSpace(2f);
         ds1.setValueTextColor(Color.WHITE);
         ds1.setValueTextSize(12f);
 
         PieData d = new PieData(xVals, ds1);
+        d.setDrawValues(false);
         //d.setValueTypeface(tf);
 
         return d;

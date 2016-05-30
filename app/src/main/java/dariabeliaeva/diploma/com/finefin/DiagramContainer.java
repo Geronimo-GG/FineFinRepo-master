@@ -2,6 +2,8 @@ package dariabeliaeva.diploma.com.finefin;
 
 
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -13,6 +15,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +50,7 @@ public class DiagramContainer extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_diagram_container, container, false);
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
         tabHost = ((NewMain) getActivity()).getTabHost();
+        tabHost.setTabMode(TabLayout.MODE_SCROLLABLE);
         initSpinner();
         fragmentIn = new Diagram();
         fragmentOut = new Diagram();
@@ -63,8 +67,12 @@ public class DiagramContainer extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                try{
                 fragmentIn.setDate(getDateFor(i));
                 fragmentOut.setDate(getDateFor(i));
+                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) adapterView.getChildAt(0)).setTypeface(Typeface.DEFAULT_BOLD);
+                }catch (Exception e){}
             }
 
             @Override
@@ -108,6 +116,9 @@ public class DiagramContainer extends Fragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
         adapter.addFragment(fragmentOut, "Outcomes");
         adapter.addFragment(fragmentIn, "Incomes");
+        adapter.addFragment(new Diagram(), "Incomes");
+        adapter.addFragment(new Diagram(), "Incomes");
+        adapter.addFragment(new Diagram(), "Incomes");
         viewPager.setAdapter(adapter);
     }
 

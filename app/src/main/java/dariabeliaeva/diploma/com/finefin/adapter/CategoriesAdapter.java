@@ -1,10 +1,12 @@
 package dariabeliaeva.diploma.com.finefin.adapter;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int DEFAULT_VIEW = 2;
 
     private Map<String, String> categories = new HashMap<>();
+    private int[] colors;
     private Context context;
 
     public CategoriesAdapter(Context context) {
@@ -74,11 +77,17 @@ public class CategoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ArrayList<String> keys = new ArrayList<>(categories.keySet());
         holder.tvCatName.setText(keys.get(position));
         holder.tvCatTotalPrice.setText(categories.get(keys.get(position)));
+        holder.imageColor.setColorFilter(colors[position]);
     }
 
     public void setCategories(Map<String, String> categories) {
         this.categories = categories;
         notifyDataSetChanged();
+    }
+
+    public void setColors(int[] colors){
+        this.colors = colors;
+
     }
 
     public void add(String catName, String catPrice){
@@ -88,11 +97,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     static class CategoriesViewHolder extends RecyclerView.ViewHolder{
         private TextView tvCatName, tvCatTotalPrice;
+        private ImageView imageColor;
 
         public CategoriesViewHolder(View itemView) {
             super(itemView);
             tvCatName = (TextView) itemView.findViewById(R.id.tvCatName);
             tvCatTotalPrice = (TextView) itemView.findViewById(R.id.tvCatTotalPrice);
+            imageColor = (ImageView) itemView.findViewById(R.id.imageColor);
 
         }
     }
