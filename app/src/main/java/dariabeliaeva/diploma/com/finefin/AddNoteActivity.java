@@ -7,9 +7,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TabHost;
@@ -33,6 +35,7 @@ public class AddNoteActivity extends AppCompatActivity {
     TabLayout tab;
     SpendingsDAO spenDAO = new SpendingsDAO();
     Date date = new Date();
+    Toolbar toolbar;
 
 
 
@@ -41,6 +44,8 @@ public class AddNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         tab = (TabLayout) findViewById(R.id.tabHost);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
