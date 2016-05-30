@@ -21,17 +21,6 @@ public class CatListAdapter extends RecyclerView.Adapter<CatListAdapter.Categori
     Categories selected;
 
     ArrayList<Categories> cats = new ArrayList<>();
-    private static final int[] COLORS = new int[] {
-            Color.argb(255, 28, 160, 170),
-            Color.argb(255, 99, 161, 247),
-            Color.argb(255, 13, 79, 139),
-            Color.argb(255, 89, 113, 173),
-            Color.argb(255, 200, 213, 219),
-            Color.argb(255, 99, 214, 74),
-            Color.argb(255, 205, 92, 92),
-            Color.argb(255, 105, 5, 98)
-    };
-
 
     CatListAdapter(){}
 
@@ -54,10 +43,15 @@ public class CatListAdapter extends RecyclerView.Adapter<CatListAdapter.Categori
 //
         if (selected == cats.get(position))
         {
-            holder.image.setBackgroundResource(R.drawable.circle);
+            holder.image.setBackgroundResource(R.drawable.gr_circle);
+            holder.image.setImageResource(R.drawable.ic_checkmark_white);
+            holder.spenTextView.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.base_green));
+
         }
         else {
-            holder.image.setBackgroundResource(0);
+            holder.image.setBackgroundResource(R.drawable.circle);
+            holder.spenTextView.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.base_gray));
+
 
         }
 

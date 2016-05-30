@@ -9,4 +9,6 @@
     <color name="list_item_title">#FFFFFF</color>
     <color name="counter_text_color">#FFFFFF</color>
     <color name="background_nav">#c28181</color>
+    <color name="base_green">#00d96b</color>
+    <color name="base_gray">#80000000</color>
 </resources>

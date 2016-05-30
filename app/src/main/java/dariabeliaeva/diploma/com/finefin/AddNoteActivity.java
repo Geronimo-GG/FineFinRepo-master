@@ -94,6 +94,9 @@ public class AddNoteActivity extends AppCompatActivity {
                 }else{
                     selected = inFrag.getSelected();
                 }
+                if (selected == null) selected = outFrag.getSelected();
+                if (selected == null) selected = inFrag.getSelected();
+
                 catName = selected.getCat_name();
                 if (selected.getType().equals("outcome")) {
                     spenSum = spenSum * (-1);

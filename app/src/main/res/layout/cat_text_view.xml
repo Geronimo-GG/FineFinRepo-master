@@ -15,7 +15,11 @@
                 android:layout_height="40dp"
                 android:id="@+id/imageView2"
                 android:src="@drawable/ic_directions_subway_white_24px"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:padding="8dp"
+                android:tintMode="src_in"
+                android:tint="@color/base_gray" />
 
             <TextView
                 android:id="@+id/todo_text_view"
@@ -25,7 +29,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:textSize="14sp"
-                android:textColor="@android:color/black"
+                android:textColor="#4d000000"
                 android:text="text" />
 
         </LinearLayout>
