@@ -25,6 +25,7 @@ import java.util.Random;
 import dariabeliaeva.diploma.com.finefin.dao.AdvicesDAO;
 import dariabeliaeva.diploma.com.finefin.dao.SpendingsDAO;
 import dariabeliaeva.diploma.com.finefin.data_models.Advices;
+import dariabeliaeva.diploma.com.finefin.data_models.FinancialGoals;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -91,6 +92,7 @@ public class NewMain extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 
@@ -142,6 +144,15 @@ public class NewMain extends AppCompatActivity
             //newFragment = ;
             BudgetFragment budgetFragment = new BudgetFragment();
             transaction.replace(R.id.content_main, budgetFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
+        } else if (id == R.id.nav_goal) {
+            toolbar.setTitle("Financial goals");
+
+            //newFragment = ;
+            FragmentGoals financialGoalsFragment = new FragmentGoals();
+            transaction.replace(R.id.content_main, financialGoalsFragment);
             transaction.addToBackStack(null);
             transaction.commit();
 
