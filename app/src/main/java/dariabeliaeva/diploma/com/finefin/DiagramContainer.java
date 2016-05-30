@@ -37,7 +37,7 @@ public class DiagramContainer extends Fragment {
     private TabLayout tabHost;
     private SpinnerAdapter spinnerAdapter;
     private ArrayList<String> items;
-    private Diagram fragmentIn, fragmentOut;
+    private Diagram diagramDay, diagramWeek, diagramMonth, diagramAllTime;
 
     public DiagramContainer() {
         // Required empty public constructor
@@ -52,9 +52,15 @@ public class DiagramContainer extends Fragment {
         tabHost = ((NewMain) getActivity()).getTabHost();
         tabHost.setTabMode(TabLayout.MODE_SCROLLABLE);
         initSpinner();
-        fragmentIn = new Diagram();
-        fragmentOut = new Diagram();
-        fragmentOut.setOutcomes(true);
+        diagramDay = new Diagram();
+        diagramWeek = new Diagram();
+        diagramMonth = new Diagram();
+        diagramAllTime = new Diagram();
+
+        diagramDay.setDate(getDateFor(DAY));
+        diagramWeek.setDate(getDateFor(WEEK));
+        diagramMonth.setDate(getDateFor(MONTH));
+        diagramAllTime.setDate(getDateFor(ALL_TIME));
 
         setupViewPager(viewPager);
         tabHost.setupWithViewPager(viewPager);
@@ -68,8 +74,11 @@ public class DiagramContainer extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 try{
-                fragmentIn.setDate(getDateFor(i));
-                fragmentOut.setDate(getDateFor(i));
+                    diagramDay.setOutcomes(i==0);
+                    diagramWeek.setOutcomes(i==0);
+                    diagramMonth.setOutcomes(i==0);
+                    diagramAllTime.setOutcomes(i==0);
+
                 ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
                 ((TextView) adapterView.getChildAt(0)).setTypeface(Typeface.DEFAULT_BOLD);
                 }catch (Exception e){}
@@ -77,16 +86,16 @@ public class DiagramContainer extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                fragmentIn.setDate(getDateFor(DAY));
-                fragmentOut.setDate(getDateFor(DAY));
+                diagramDay.setOutcomes(false);
+                diagramWeek.setOutcomes(false);
+                diagramMonth.setOutcomes(false);
+                diagramAllTime.setOutcomes(false);
             }
         });
 
         items = new ArrayList<>();
-        items.add("Day");
-        items.add("Week");
-        items.add("Month");
-        items.add("All time");
+        items.add("Outcomes");
+        items.add("Incomes");
 
         spinnerAdapter = new CustomSpinnerAdapter(getActivity(), items);
         spinner.setAdapter(spinnerAdapter);
@@ -114,11 +123,10 @@ public class DiagramContainer extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(fragmentOut, "Outcomes");
-        adapter.addFragment(fragmentIn, "Incomes");
-        adapter.addFragment(new Diagram(), "Incomes");
-        adapter.addFragment(new Diagram(), "Incomes");
-        adapter.addFragment(new Diagram(), "Incomes");
+        adapter.addFragment(diagramDay, "Day");
+        adapter.addFragment(diagramWeek, "Week");
+        adapter.addFragment(diagramMonth, "Month");
+        adapter.addFragment(diagramAllTime, "All time");
         viewPager.setAdapter(adapter);
     }
 

@@ -146,7 +146,7 @@ public class    Diagram extends Fragment {
 
     public void setOutcomes(boolean outcomes) {
         this.outcomes = outcomes;
-    }
+        if (rootView != null) initData();    }
 
     public void setDate(Date date) {
         this.date = date;
