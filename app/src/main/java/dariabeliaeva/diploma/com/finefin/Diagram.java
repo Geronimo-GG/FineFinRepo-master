@@ -23,7 +23,7 @@ import dariabeliaeva.diploma.com.finefin.charts.DataFiller;
 import dariabeliaeva.diploma.com.finefin.dao.CategoriesDAO;
 import dariabeliaeva.diploma.com.finefin.dao.SpendingsDAO;
 
-public class Diagram extends Fragment {
+public class    Diagram extends Fragment {
 
     private boolean outcomes;
     private RecyclerView categoriesList;
@@ -45,7 +45,7 @@ public class Diagram extends Fragment {
         return rootView;
     }
 
-    private void initCategoriesList(Map<String, String> imuttData) {
+    private void initCategoriesList(Map<String, String> imuttData, int[] colors) {
         Map<String, String> data = new HashMap<>();
         if (outcomes) {
             for (String key : imuttData.keySet()){
@@ -63,7 +63,9 @@ public class Diagram extends Fragment {
 
         sum = sumData(data);
 
+
         CategoriesAdapter categoriesAdapter = new CategoriesAdapter(getActivity());
+        categoriesAdapter.setColors(colors);
         categoriesAdapter.setCategories(data);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         categoriesList.setLayoutManager(linearLayoutManager);
@@ -93,30 +95,26 @@ public class Diagram extends Fragment {
         for(String categoryName : categoriesNames){
             data.put(categoryName, spendingsDAO.sumByCat(categoryName, date) + "");
         }
-        initCategoriesList(data);
+        HashMap<String, String> bufData = new HashMap<>(data);
 
         if (outcomes) data = invertValues(data);
         PieChart mChart = (PieChart) rootView.findViewById(R.id.chart);
-        if (outcomes) {
-            mChart.setCenterText("Outcomes");
-            mChart.setDescription("You spent: " + sum);
-        }
-        else {
-            mChart.setCenterText("Incomes");
-            mChart.setDescription("You earned: " + sum);
+        mChart.setDescription("");
 
-        }
 
         mChart.setCenterTextSize(10f);
+        mChart.getLegend().setEnabled(false);
+        mChart.setDrawSliceText(false);
 
         mChart.setHoleRadius(45);
-        mChart.setTransparentCircleRadius(50f);
+        mChart.setTransparentCircleRadius(0);
 
         Legend l = mChart.getLegend();
         l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
 
-
         PieData pieData = df.generatePieData(data, outcomes);
+        initCategoriesList(bufData, pieData.getColors());
+
         if (pieData.getYValueSum() == 0) mChart.setCenterText("Empty");
         mChart.setData(pieData);
         mChart.invalidate();
