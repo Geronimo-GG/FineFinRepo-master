@@ -18,5 +18,5 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Daria Beliaeva"
         android:fontFamily="sans-serif"
-        android:id="@+id/textView7" />
+        android:id="@+id/tvUsername" />
 </LinearLayout>

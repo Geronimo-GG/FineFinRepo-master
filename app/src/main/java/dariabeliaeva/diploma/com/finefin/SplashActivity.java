@@ -19,9 +19,10 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!sharedPreferences.getBoolean("show_tutorial", true)) tutorialFinished();
         setContentView(R.layout.activity_splash);
         rootContainer = (FrameLayout) findViewById(R.id.root_container);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         setupNameScreen();
         setupAdvicesScreen();
@@ -40,11 +41,11 @@ public class SplashActivity extends AppCompatActivity {
                 String password = ((EditText) passwordScreen.findViewById(R.id.etPassword)).getText().toString();
                 if (password.length() > 0){
                     ((EditText) passwordScreen.findViewById(R.id.etPassword)).setError(null);
+                    sharedPreferences.edit().putString("password", password).apply();
                     tutorialFinished();
                 }else{
                     ((EditText) passwordScreen.findViewById(R.id.etPassword)).setError("Can't be empty");
                 }
-//                TODO save
                 advicesScreen.setVisibility(View.GONE);
                 passwordScreen.setVisibility(View.VISIBLE);
             }
@@ -65,6 +66,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void tutorialFinished() {
+        sharedPreferences.edit().putBoolean("show_tutorial", false).apply();
         startActivity(new Intent(this, NewMain.class));
         finish();
     }
@@ -77,7 +79,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean isChecked = ((CheckBox) advicesScreen.findViewById(R.id.cbGetAdvices)).isChecked();
-//                TODO save
+                sharedPreferences.edit().putBoolean("get_advices", isChecked).apply();
                 advicesScreen.setVisibility(View.GONE);
                 passwordScreen.setVisibility(View.VISIBLE);
             }
@@ -93,9 +95,12 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (((EditText) nameScreen.findViewById(R.id.etName)).length() > 0){
+                    String username = ((EditText) nameScreen.findViewById(R.id.etName)).getText().toString();
                     ((EditText) nameScreen.findViewById(R.id.etName)).setError(null);
                     nameScreen.setVisibility(View.GONE);
                     advicesScreen.setVisibility(View.VISIBLE);
+                    sharedPreferences.edit().putString("username", username).apply();
+
                 }else{
                     ((EditText) nameScreen.findViewById(R.id.etName)).setError("Can't be empty");
                 }

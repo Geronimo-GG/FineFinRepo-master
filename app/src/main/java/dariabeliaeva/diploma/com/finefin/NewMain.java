@@ -1,14 +1,18 @@
 package dariabeliaeva.diploma.com.finefin;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +22,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -36,11 +43,14 @@ public class NewMain extends AppCompatActivity
     TabLayout tabs;
     Spinner spinner;
     Toolbar toolbar;
+    TextView tvUsername;
+    SharedPreferences sharedPreferences;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         setContentView(R.layout.activity_new_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -49,8 +59,12 @@ public class NewMain extends AppCompatActivity
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         spinner = (Spinner) findViewById(R.id.spinner);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        tvUsername = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvUsername);
+
 
         showRandomAdvice(Realm.getDefaultInstance());
+        if (!sharedPreferences.getString("password", "").equals("")) showPasswordScreen();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -58,12 +72,46 @@ public class NewMain extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         getFragmentManager().beginTransaction().add(R.id.content_main, new MainList()).commit();
 
 
+    }
+
+    private void showPasswordScreen() {
+        final EditText editTextPass = new EditText(this);
+        editTextPass.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        editTextPass.setInputType(InputType.TYPE_CLASS_NUMBER);
+        dialog = null;
+        dialog = new AlertDialog.Builder(this)
+                .setView(editTextPass)
+                .setTitle("Enter your password")
+                .setPositiveButton("Sign in", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (editTextPass.getText().toString().equals(sharedPreferences.getString("password", "").trim())){
+                            dialogInterface.dismiss();
+                        }else{
+                            showPasswordScreen();
+                        }
+                    }
+                })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+
+                    }
+                })
+                .show();
+
+                dialog.setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tvUsername.setText(sharedPreferences.getString("username", ""));
     }
 
     @Override
