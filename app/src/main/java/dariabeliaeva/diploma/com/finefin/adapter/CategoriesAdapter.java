@@ -77,7 +77,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ArrayList<String> keys = new ArrayList<>(categories.keySet());
         holder.tvCatName.setText(keys.get(position));
         holder.tvCatTotalPrice.setText(categories.get(keys.get(position)) + "$");
-        holder.imageColor.setColorFilter(colors[position]);
+        try {
+            holder.imageColor.setColorFilter(colors[position]);
+        }catch (Exception e){
+            holder.imageColor.setVisibility(View.GONE);
+        }
     }
 
     public void setCategories(Map<String, String> categories) {
