@@ -4,30 +4,30 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/transparency"
+            android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
             android:id="@+id/nav_new"
             android:checkable="false"
-            android:icon="@drawable/transparency"
+            android:icon="@drawable/ic_add_circle_black_24px"
             android:title="Add new" />
         <item
             android:id="@+id/nav_stat"
-            android:icon="@drawable/transparency"
+            android:icon="@drawable/ic_stat_black_24px"
             android:title="Statistics" />
         <item
             android:id="@+id/nav_plan"
-            android:icon="@drawable/transparency"
+            android:icon="@drawable/ic_plan_black_24px"
             android:title="Plan budget" />
         <item
             android:id="@+id/nav_goal"
             android:title="Set financial goal"
-            android:icon="@drawable/transparency"            />
+            android:icon="@drawable/ic_notifications_black_24dp"            />
     </group>
 
 
             <item
-                android:icon="@drawable/transparency"
+                android:icon="@drawable/ic_menu_manage"
                 android:id="@+id/nav_share"
                 android:title="Settings" />
 
