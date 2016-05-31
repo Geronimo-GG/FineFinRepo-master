@@ -2,10 +2,11 @@ package dariabeliaeva.diploma.com.finefin;
 
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import android.renderscript.Type;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,8 +23,14 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import dariabeliaeva.diploma.com.finefin.adapter.BudgetAdapter;
 import dariabeliaeva.diploma.com.finefin.adapter.CategoriesAdapter;
@@ -53,6 +60,8 @@ public class BudgetFragment extends Fragment {
     float monthlyIncome;
 //    Spinner catsSpinner;
     Realm realm;
+    SharedPreferences sharedPreferences;
+    Gson gson = new Gson();
 
 
     public BudgetFragment() {
@@ -72,7 +81,7 @@ public class BudgetFragment extends Fragment {
         categoriesAdapter = new BudgetAdapter(getActivity());
         categoriesList.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoriesList.setAdapter(categoriesAdapter);
-
+        sharedPreferences = getActivity().getSharedPreferences("budget", Context.MODE_PRIVATE);
 
         ArrayList<String> categoriesNames = new ArrayList<>();
         ArrayList<Categories> categories = new ArrayList<>();
@@ -85,6 +94,10 @@ public class BudgetFragment extends Fragment {
         }
 
         spinnerAdapter = new CustomSpinnerAdapter(getActivity(), categoriesNames);
+        etMonthlyIncome.setText(sharedPreferences.getString("monthly_income", ""));
+        Map<String, String> map = gson.fromJson(sharedPreferences.getString("budget_data", ""), HashMap.class);
+        if (map == null) map = new HashMap<>();
+        categoriesAdapter.setCategories(map);
         return rootView;
     }
 
@@ -108,8 +121,10 @@ public class BudgetFragment extends Fragment {
                 try{
                     if (charSequence.length() > 0) fabAdd.show();
                     else fabAdd.hide();
+                    sharedPreferences.edit().putString("monthly_income", etMonthlyIncome.getText().toString()).apply();
                     setMonthlyIncome(Float.parseFloat(charSequence.toString()));
                     updateIncome();
+
                 }
                 catch (Exception e){
 
@@ -190,6 +205,9 @@ public class BudgetFragment extends Fragment {
 
     private void addNewCategory(float price, String catName){
         categoriesAdapter.add(catName, price + "");
+        sharedPreferences.edit().putString("budget_data", gson.toJson(categoriesAdapter.getCategories())).apply();
+        sharedPreferences.edit().putString("monthly_income", etMonthlyIncome.getText().toString()).apply();
+
 
     }
 

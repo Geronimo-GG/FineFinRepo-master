@@ -7,13 +7,13 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by Dari on 5/16/2016.
  */
-public class Budget extends RealmObject {
+public class Budget  {
 
     private long monthly_income;
     private long difference_balance;
-    private RealmList<Spendings> plan_to_spend;
+    private RealmList<Categories> plan_to_spend;
 
-    public Budget(long monthly_income, long difference_balance, RealmList<Spendings> plan_to_spend) {
+    public Budget(long monthly_income, long difference_balance, RealmList<Categories> plan_to_spend) {
         this.monthly_income = monthly_income;
         this.difference_balance = difference_balance;
         this.plan_to_spend = plan_to_spend;
@@ -38,11 +38,11 @@ public class Budget extends RealmObject {
         this.difference_balance = difference_balance;
     }
 
-    public RealmList<Spendings> getPlan_to_spend() {
+    public RealmList<Categories> getPlan_to_spend() {
         return plan_to_spend;
     }
 
-    public void setPlan_to_spend(RealmList<Spendings> plan_to_spend) {
+    public void setPlan_to_spend(RealmList<Categories> plan_to_spend) {
         this.plan_to_spend = plan_to_spend;
     }
 }
