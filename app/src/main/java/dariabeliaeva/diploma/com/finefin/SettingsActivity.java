@@ -38,7 +38,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
-            PreferenceManager.getDefaultSharedPreferences(this).getAll();
         }
 
 

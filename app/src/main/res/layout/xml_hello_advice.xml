@@ -20,7 +20,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:layout_above="@+id/checkBox"
+        android:layout_above="@+id/cbGetAdvices"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="53dp" />
 
@@ -33,7 +33,7 @@
         android:text="Click to continue"
         android:textColor="#ffffff"
         android:background="@android:color/transparent"
-        android:id="@+id/button"
+        android:id="@+id/btnAdvices"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         />
@@ -42,14 +42,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Yes, I definately do!"
-        android:id="@+id/checkBox"
+        android:id="@+id/cbGetAdvices"
         android:textSize="28dp"
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/btnAdvices"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="76dp" />
+        android:layout_marginBottom="76dp"
+        android:checked="false" />
 
 
 </RelativeLayout>
