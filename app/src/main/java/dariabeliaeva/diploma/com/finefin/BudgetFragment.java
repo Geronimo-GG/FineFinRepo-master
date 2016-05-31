@@ -2,9 +2,11 @@ package dariabeliaeva.diploma.com.finefin;
 
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import dariabeliaeva.diploma.com.finefin.adapter.BudgetAdapter;
 import dariabeliaeva.diploma.com.finefin.adapter.CategoriesAdapter;
 import dariabeliaeva.diploma.com.finefin.adapter.CustomSpinnerAdapter;
 import dariabeliaeva.diploma.com.finefin.data_models.Budget;
@@ -36,15 +40,15 @@ import io.realm.RealmList;
 public class BudgetFragment extends Fragment {
 
 
-    CategoriesAdapter categoriesAdapter;
+    BudgetAdapter categoriesAdapter;
     CustomSpinnerAdapter spinnerAdapter;
     RecyclerView categoriesList;
     View rootView;
     TextView tvLeftIncome;
-    EditText etMonthlyIncome, etCatPrice;
+    EditText etMonthlyIncome;
     FloatingActionButton fabAdd;
     float monthlyIncome;
-    Spinner catsSpinner;
+//    Spinner catsSpinner;
     Realm realm;
 
 
@@ -59,9 +63,10 @@ public class BudgetFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_budget, container, false);
         realm = Realm.getDefaultInstance();
         findViewsById();
+        if (etMonthlyIncome.length() == 0)fabAdd.hide();
         setUiListeners();
 
-        categoriesAdapter = new CategoriesAdapter(getActivity());
+        categoriesAdapter = new BudgetAdapter(getActivity());
         categoriesList.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoriesList.setAdapter(categoriesAdapter);
 
@@ -77,7 +82,6 @@ public class BudgetFragment extends Fragment {
         }
 
         spinnerAdapter = new CustomSpinnerAdapter(getActivity(), categoriesNames);
-        catsSpinner.setAdapter(spinnerAdapter);
         return rootView;
     }
 
@@ -85,10 +89,8 @@ public class BudgetFragment extends Fragment {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etMonthlyIncome.length() > 0 && etCatPrice.length() > 0){
-                    addNewCategory(Float.parseFloat(etCatPrice.getText().toString()));
-                    updateIncome();
-                }
+                showAdditionDialog();
+
             }
         });
 
@@ -101,6 +103,8 @@ public class BudgetFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 try{
+                    if (charSequence.length() > 0) fabAdd.show();
+                    else fabAdd.hide();
                     setMonthlyIncome(Float.parseFloat(charSequence.toString()));
                     updateIncome();
                 }
@@ -116,12 +120,49 @@ public class BudgetFragment extends Fragment {
         });
     }
 
+    private void showAdditionDialog() {
+        final Spinner catsSpinner = new Spinner(getActivity());
+        final EditText etCatPrice = new EditText(getActivity());
+        etCatPrice.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        catsSpinner.setAdapter(spinnerAdapter);
+
+        LinearLayout linearLayout = new LinearLayout(getActivity());
+        linearLayout.addView(etCatPrice);
+        linearLayout.addView(catsSpinner);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+
+        AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+        b.setView(linearLayout);
+        b.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (etMonthlyIncome.length() > 0 && etCatPrice.length() > 0){
+                    addNewCategory(Float.parseFloat(etCatPrice.getText().toString()), catsSpinner.getSelectedItem().toString());
+                    updateIncome();
+                }
+            }
+        });
+        b.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+
+        b.show();
+
+
+
+    }
+
     private void findViewsById() {
         categoriesList = (RecyclerView) rootView.findViewById(R.id.fin_list);
         etMonthlyIncome = (EditText) rootView.findViewById(R.id.monthly_incomes);
-        etCatPrice = (EditText) rootView.findViewById(R.id.cat_sum);
+//        etCatPrice = (EditText) rootView.findViewById(R.id.cat_sum);
         fabAdd = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        catsSpinner = (Spinner) rootView.findViewById(R.id.planets_spinner);
+//        catsSpinner = (Spinner) rootView.findViewById(R.id.planets_spinner);
         tvLeftIncome = (TextView) rootView.findViewById(R.id.tvIncomeLeft);
     }
 
@@ -141,8 +182,8 @@ public class BudgetFragment extends Fragment {
         monthlyIncome = income;
     }
 
-    private void addNewCategory(float price){
-        categoriesAdapter.add(catsSpinner.getSelectedItem().toString(), price + "");
+    private void addNewCategory(float price, String catName){
+        categoriesAdapter.add(catName, price + "");
 
     }
 
