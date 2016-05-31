@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dariabeliaeva.diploma.com.finefin.R;
+import dariabeliaeva.diploma.com.finefin.dao.CategoriesDAO;
+import dariabeliaeva.diploma.com.finefin.data_models.Categories;
 
 /**
  * Created by andrew on 11.02.16.
@@ -25,6 +27,7 @@ public class BudgetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Map<String, String> categories = new HashMap<>();
     private int[] colors;
     private Context context;
+    private CategoriesDAO categoriesDAO = new CategoriesDAO();
 
     public BudgetAdapter(Context context) {
         this.context = context;
@@ -75,6 +78,7 @@ public class BudgetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         ArrayList<String> keys = new ArrayList<>(categories.keySet());
         holder.tvCatName.setText(keys.get(position));
         holder.tvCatTotalPrice.setText(categories.get(keys.get(position)) + "$");
+        holder.image.setImageResource(categoriesDAO.getIcon(keys.get(position)));
     }
 
     public void setCategories(Map<String, String> categories) {
@@ -94,11 +98,13 @@ public class BudgetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     static class CategoriesViewHolder extends RecyclerView.ViewHolder{
         private TextView tvCatName, tvCatTotalPrice;
+        private ImageView image;
 
         public CategoriesViewHolder(View itemView) {
             super(itemView);
             tvCatName = (TextView) itemView.findViewById(R.id.tvCatName);
             tvCatTotalPrice = (TextView) itemView.findViewById(R.id.tvCatTotalPrice);
+            image = (ImageView) itemView.findViewById(R.id.image);
 
         }
     }

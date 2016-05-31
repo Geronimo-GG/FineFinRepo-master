@@ -5,11 +5,13 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import android.renderscript.Type;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,7 @@ import dariabeliaeva.diploma.com.finefin.data_models.Budget;
 import dariabeliaeva.diploma.com.finefin.data_models.Categories;
 import dariabeliaeva.diploma.com.finefin.data_models.Spendings;
 import dariabeliaeva.diploma.com.finefin.data_models.User;
+import dariabeliaeva.diploma.com.finefin.utils.Convertations;
 import io.realm.Realm;
 import io.realm.RealmList;
 
@@ -124,12 +127,15 @@ public class BudgetFragment extends Fragment {
         final Spinner catsSpinner = new Spinner(getActivity());
         final EditText etCatPrice = new EditText(getActivity());
         etCatPrice.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        etCatPrice.setInputType(InputType.TYPE_CLASS_NUMBER);
         catsSpinner.setAdapter(spinnerAdapter);
 
         LinearLayout linearLayout = new LinearLayout(getActivity());
         linearLayout.addView(etCatPrice);
         linearLayout.addView(catsSpinner);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
+        int pad = Convertations.dpToPx(16, getActivity());
+        linearLayout.setPadding(pad, pad, pad, pad);
 
 
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
