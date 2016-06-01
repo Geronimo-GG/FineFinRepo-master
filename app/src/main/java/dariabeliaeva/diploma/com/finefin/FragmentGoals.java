@@ -3,6 +3,7 @@ package dariabeliaeva.diploma.com.finefin;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,17 +61,41 @@ public class FragmentGoals extends Fragment {
         categoriesAdapter = new CategoriesAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(categoriesAdapter);
-        initAdapterWithData();
         setUiListeners();
 
+        /*ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                //realm.beginTransaction();
+                //categoriesAdapter.ge().get(viewHolder.getAdapterPosition()).removeFromRealm();
+                //realm.commitTransaction();
+                //finListAdapter.removeSpending(viewHolder.getAdapterPosition());
+
+            }
+        };*/
+
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initAdapterWithData();
+
     }
 
     private void setUiListeners() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAdditionDialog();
+
+                //showAdditionDialog();
+                startActivity(new Intent(getActivity(), AddFinancialGoalActivity.class));
             }
         });
     }

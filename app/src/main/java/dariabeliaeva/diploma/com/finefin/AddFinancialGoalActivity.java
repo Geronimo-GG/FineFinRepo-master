@@ -47,6 +47,9 @@ public class AddFinancialGoalActivity extends AppCompatActivity {
                     Snackbar.make(fab, "Please fill price", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
+                if (goal_time.getText().toString().length() == 0){
+                    goalTime = 1;
+                }
 
                 goalPrice = Integer.parseInt(goal_price.getText().toString());
                 goalName = goal_name.getText().toString();

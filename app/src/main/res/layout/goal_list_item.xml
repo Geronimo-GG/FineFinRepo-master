@@ -5,6 +5,22 @@
     android:layout_height="wrap_content"
     android:id="@+id/list_cell">
 
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_monetization_on_white_24px"
+        android:scaleType="fitCenter"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:padding="8dp"
+        android:background="@drawable/circle"
+        android:tint="#787878"
+        android:tintMode="src_in"
+        android:layout_marginTop="8dp" />
+
     <TextView
         android:id="@+id/todo_text_view"
         android:layout_width="wrap_content"

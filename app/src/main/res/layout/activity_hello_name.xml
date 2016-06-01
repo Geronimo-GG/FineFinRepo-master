@@ -16,12 +16,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Hello!"
         android:id="@+id/hellostr"
-        android:textSize="40dp"
+        android:textSize="36dp"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:layout_above="@+id/editText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="122dp" />
+        android:layout_marginBottom="53dp"
+        android:layout_above="@+id/hello_end_str"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="What's your name?"
         android:id="@+id/hello_end_str"
-        android:textSize="40dp"
+        android:textSize="36dp"
         android:textStyle="bold"
         android:textColor="#ffffff"
         android:layout_centerVertical="true"
