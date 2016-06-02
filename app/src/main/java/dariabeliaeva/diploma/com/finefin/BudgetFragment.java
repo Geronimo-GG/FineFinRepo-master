@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -81,6 +82,7 @@ public class BudgetFragment extends Fragment {
         categoriesAdapter = new BudgetAdapter(getActivity());
         categoriesList.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoriesList.setAdapter(categoriesAdapter);
+        initSwipeToRemove();
         sharedPreferences = getActivity().getSharedPreferences("budget", Context.MODE_PRIVATE);
 
         ArrayList<String> categoriesNames = new ArrayList<>();
@@ -95,10 +97,36 @@ public class BudgetFragment extends Fragment {
 
         spinnerAdapter = new CustomSpinnerAdapter(getActivity(), categoriesNames);
         etMonthlyIncome.setText(sharedPreferences.getString("monthly_income", ""));
+        initWithData();
+        return rootView;
+    }
+
+    private void initWithData() {
         Map<String, String> map = gson.fromJson(sharedPreferences.getString("budget_data", ""), HashMap.class);
         if (map == null) map = new HashMap<>();
         categoriesAdapter.setCategories(map);
-        return rootView;
+        updateIncome();
+    }
+
+    private void initSwipeToRemove() {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                categoriesAdapter.removeByKey(((BudgetAdapter.CategoriesViewHolder) viewHolder).tvCatName.getText());
+                sharedPreferences.edit().putString("budget_data", gson.toJson(categoriesAdapter.getCategories())).apply();
+                initWithData();
+
+
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(categoriesList);
     }
 
     private void setUiListeners() {

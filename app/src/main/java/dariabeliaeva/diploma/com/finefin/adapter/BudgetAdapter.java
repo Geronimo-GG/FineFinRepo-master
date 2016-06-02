@@ -96,9 +96,13 @@ public class BudgetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
-    static class CategoriesViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvCatName, tvCatTotalPrice;
-        private ImageView image;
+    public void removeByKey(CharSequence catToRemove) {
+        categories.remove(catToRemove);
+    }
+
+    public static class CategoriesViewHolder extends RecyclerView.ViewHolder{
+        public TextView tvCatName, tvCatTotalPrice;
+        public ImageView image;
 
         public CategoriesViewHolder(View itemView) {
             super(itemView);
