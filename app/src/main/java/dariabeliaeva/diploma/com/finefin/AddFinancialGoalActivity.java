@@ -39,6 +39,7 @@ public class AddFinancialGoalActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 if (goal_name.getText().toString().length() == 0){
                     Snackbar.make(fab, "Please fill name", Snackbar.LENGTH_SHORT).show();
                     return;
@@ -49,11 +50,13 @@ public class AddFinancialGoalActivity extends AppCompatActivity {
                 }
                 if (goal_time.getText().toString().length() == 0){
                     goalTime = 1;
+                }else{
+                    goalTime = Integer.parseInt(goal_time.getText().toString());
+
                 }
 
                 goalPrice = Integer.parseInt(goal_price.getText().toString());
                 goalName = goal_name.getText().toString();
-                goalTime = Integer.parseInt(goal_time.getText().toString());
 
 
                 goalsDAO.addGoal(goalName, goalPrice, goalTime);
