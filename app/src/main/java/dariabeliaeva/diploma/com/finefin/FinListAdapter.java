@@ -46,10 +46,10 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
         Spendings spenItem = spendings.get(position);
         holder.spenTextView.setText(spenItem.getName());
         icon_id = categoriesDAO.getIcon(spenItem.getCategory());
-//        date = spenItem.getDate();
+        date = spenItem.getDate();
         //date_today = ;
 
-//        formated = DateFormat.getDateInstance().format(date);
+        formated = DateFormat.getDateInstance().format(date);
 
         if(spenItem.getPrice() > 0) {
             holder.priceTextView.setText("+" + spenItem.getPrice());
@@ -62,7 +62,7 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
         }
         holder.catTextView.setText(spenItem.getCategory());
         holder.imageView.setImageResource(icon_id);
-//        holder.dateTextView.setText(formated);
+        holder.dateTextView.setText(formated);
 //        holder.relativeLayout.setBackgroundColor(
 //                COLORS[0]
 //        );
@@ -99,7 +99,7 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
         public TextView catTextView;
         public RelativeLayout relativeLayout;
         public ImageView imageView;
-//        public TextView dateTextView;
+        public TextView dateTextView;
 
         public SpendingsViewHolder(View rootView) {
             super(rootView);
@@ -108,7 +108,7 @@ public class FinListAdapter extends RecyclerView.Adapter<FinListAdapter.Spending
             this.catTextView = (TextView) rootView.findViewById(R.id.todo_text_view);
             this.relativeLayout = (RelativeLayout) rootView.findViewById(R.id.list_cell);
             this.imageView = (ImageView) rootView.findViewById(R.id.imageView);
-//            this.dateTextView = (TextView) rootView.findViewById(R.id.date_text_view);
+            this.dateTextView = (TextView) rootView.findViewById(R.id.tvDate);
         }
     }
 

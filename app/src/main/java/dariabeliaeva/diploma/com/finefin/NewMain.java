@@ -82,7 +82,7 @@ public class NewMain extends AppCompatActivity
     private void showPasswordScreen() {
         final EditText editTextPass = new EditText(this);
         editTextPass.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        editTextPass.setInputType(InputType.TYPE_CLASS_NUMBER);
+        editTextPass.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         dialog = null;
         dialog = new AlertDialog.Builder(this)
                 .setView(editTextPass)
