@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import dariabeliaeva.diploma.com.finefin.dao.GoalsDAO;
 import dariabeliaeva.diploma.com.finefin.data_models.Categories;
 import io.realm.Realm;
 import io.realm.RealmResults;

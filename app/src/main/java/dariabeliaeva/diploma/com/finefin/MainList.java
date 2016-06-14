@@ -2,6 +2,7 @@ package dariabeliaeva.diploma.com.finefin;
 
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -90,14 +91,18 @@ public class MainList extends Fragment {
         realm.commitTransaction();
 
 
-        addAllCategories(realm);
+        if (firstLaunch()) addAllCategories(realm);
         addAllAdvices(realm);
 
         return rootView;
 
     }
 
-
+    private boolean firstLaunch() {
+        if (getActivity().getSharedPreferences("appData", Context.MODE_PRIVATE).contains("first")) return false;
+        else getActivity().getSharedPreferences("appData", Context.MODE_PRIVATE).edit().putBoolean("first", false).apply();
+        return true;
+    }
 
 
     @Override
@@ -183,7 +188,6 @@ public class MainList extends Fragment {
     {
         CategoriesDAO cat = new CategoriesDAO();
         realm.beginTransaction();
-        realm.clear(Categories.class);
         realm.commitTransaction();
         cat.addCategory("Extra", "income", R.drawable.ic_attach_money_white_24px);
         cat.addCategory("Gift", "income", R.drawable.ic_card_giftcard_white_24px);
